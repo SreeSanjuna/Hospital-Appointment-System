@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Doctor Details</title>
+</head>
+<body>
+    <h1 style="text-align: center; color:rgb(18, 164, 164) ;">Enter Doctor Details</h1> <br>
+    <form action="/admin/add_doctor_details" method="POST" style="text-align: center;"> 
+        <h3>
+            Full Name : <input type="text" name="fullname"> <br> <br>
+            Qualification : <input type="text" name="qualification"> <br> <br>
+            Specialization : <select name='specialization'>  
+                <option value="--Select--" style="text-align: center;">- -  Select  - -</option>                                                                    
+                <option value='Allergist/Immunologists'>Allergist/Immunologists</option>                     
+                <option value='Anesthesiologist'>Anesthesiologist</option>           
+                <option value='Cardiologist'>Cardiologist</option>                     
+                <option value='Dermatologist'>Dermatologist</option>                                       
+                <option value='Endocrinologist'>Endocrinologist</option>                        
+                <option value='Emergency Physician'>Emergency Physician</option>
+                <option value="Gastroenterologist">Gastroenterologist</option>
+                <option value="OB/GYN">Gynaecologist/Obstetrician</option>
+                <option value="General Surgeon">General Surgeon</option>
+                <option value="Hematologist">Hematologist</option>
+                <option value="Nephrologist">Nephrologist</option>
+                <option value="Neurologist">Neurologist</option>
+                <option value="Oncologist">Oncologist</option>
+                <option value="Ophthalmologist">Ophthalmologist</option>
+                <option value="Orthopedist">Orthopedist</option>
+                <option value="Otolaryngologist (ENT)">Otolaryngologist (ENT)</option>
+                <option value="Pediatrician">Pediatrician</option>
+                <option value="Physiatrist">Physiatrist</option>
+                <option value="Podiatrist">Podiatrist</option>
+                <option value="Psychiatrist">Psychiatrist</option>
+                <option value="Pulmonologist">Pulmonologist</option>
+                <option value="Rheumatologist">Rheumatologist</option>
+                <option value="Urologist">Urologist</option>
+            </select> <br> <br>
+            Email ID : <input type="email" name="email"> <br> <br>
+            Contact Number : <input type="text" name="contactno"> <br> <br>
+            Consultancy Fee : <input type="text" name="consultancyfee"> <br> <br>
+            Password : <input type="password" name="pwd"> <br> <br>
+            Address : <input type="text" name="address"> <br> <br>
+            City : <input type="text" name="city"> <br> <br>
+            State : <input type="text" name="state"> <br> <br> 
+        </h3>
+        <button>Add Doctor Details</button>
+    </form>
+</body>
+</html>
