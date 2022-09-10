@@ -7,7 +7,7 @@
     <title>Display doctor details</title>
 </head>
 <body>
-    <table border="1" cellpadding="5" cellspacing="5">
+    <!-- <table border="1" cellpadding="5" cellspacing="5">
         {% for row in data %}
             <tr>
             {% for d in row %}
@@ -15,6 +15,29 @@
             {% endfor %}
             </tr>
         {% endfor %}
+    </table> -->
+    <table border='1' style="border:border-collapse">
+        <th>DoctorID</th>
+        <th>Full Name</th>
+        <th>Qualification</th>
+        <th>Specialization</th>
+        <th>Email ID</th>
+        <th>Contact Number</th>
+        <th>Consultancy Fee</th>
+        <th>Password</th>
+        <th>Address</th>
+        <th>City</th>
+        <th>State</th>
+        
+    {% for i in data : %}
+
+        <tr>
+            {% for j in i : %}
+                <td>{{j}}</td>
+            {% endfor %}
+        </tr>
+
+    {% endfor %}
     </table>
 </body>
 </html>

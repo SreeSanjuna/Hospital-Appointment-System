@@ -56,10 +56,10 @@ def display():
     # val = [session['loggedUser']]
     # mycursor.execute(sql,val)
     mycursor.execute('select * from doctor_details order by doctorID desc ')
-    data=mycursor.fetchall()
+    x=mycursor.fetchall()
     conn.close()
-    print(data)
-    return render_template('display_doctor_details.html',data)
+    print(x)
+    return render_template('display_doctor_details.html',data=x)
 
 @app.route("/logout")
 def logout():
