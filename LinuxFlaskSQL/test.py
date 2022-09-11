@@ -21,23 +21,47 @@ def enter():
 def signup():
     if request.method == "GET":
         return render_template("patientlog.html")
+
     else:
+
         try:
-            print("heyyy1")
-            sql = "INSERT INTO patient_details (fullname, emailid,gender,dob,pwd,contactno,address,state,city) VALUES ( %s, %s, %s,%s,%s,%s,%s,%s,%s)"
-            print("heyyy2")
-            val = [(request.form['name'],request.form['emailid'],request.form['gender'], request.form['dob'],request.form['pwd'] ,request.form['phone'],request.form['address'],request.form['state'],request.form['city'])]
-            print("heyyy3")
-            mycursor.execute(sql, val)
-            # print(mycursor)
+            sql = "INSERT INTO patient_details (fullname, emailid, gender, dob, pwd, contactno,address,state,city) VALUES (%s, %s, %s, %s,%s,%s,%s,%s,%s)"
+            print("heyy")
+            val = [request.form['name'],request.form['emailid'], request.form['gender'],request.form['dob'] ,request.form['pwd'],request.form['contactno'],request.form['address'],request.form['state'],request.form['city']]
+            print("heyy")
+            mycursor.executemany(sql, val)
+            print("heyy final")
             conn.commit()
-            print("heyyy")
-            errmsg='email registered successfully'
+            errmsg='User registered!'
             return render_template("patientlog.html",msg=errmsg)
         except:
-            print("heyyy1111")
-            errmsg='email already registered'
-            return render_template("patientlog.html",msg=errmsg)
+            return render_template("patientlog.html")
+
+
+
+
+
+
+# def signup():
+#     if request.method == "GET":
+#         return render_template("patientlog.html")
+#     else:
+#         try:
+#             print("heyyy1")
+#             sql = "INSERT INTO patient_details (fullname, emailid,gender,dob,pwd,contactno,address,state,city) VALUES ( %s, %s, %s,%s,%s,%s,%s,%s,%s)"
+#             print("heyyy2")
+#             val = [request.form['name'],request.form['emailid'],request.form['gender'], request.form['dob'],request.form['pwd'] ,request.form['phone'],request.form['address'],request.form['state'],request.form['city']]
+#             print("heyyy3")
+#             mycursor.executemany(sql, val)
+#             # print(mycursor)
+#             conn.commit()
+#             print("heyyy")
+#             errmsg='email registered successfully'
+#             return render_template("patientlog.html",msg=errmsg)
+#         except:
+#             print("heyyy1111")
+#             errmsg='email already registered'
+#             return render_template("patientlog.html",msg=errmsg)
 
 @app.route('/admin_login')
 def home():
