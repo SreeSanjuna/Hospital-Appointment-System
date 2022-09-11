@@ -10,12 +10,12 @@ conn = mysql.connector.connect(user='root',
                                host='127.0.0.1',
                                database='doctorappoint',
                                password='Sreesanjuna@2000')
-
+# password='Sreesanjuna@2000'
 mycursor=conn.cursor()
 
 @app.route('/')
 def enter():
-    return render_template('welcome.html')
+    return render_template('Bootsrap.html')
 
 @app.route('/admin_login')
 def home():
