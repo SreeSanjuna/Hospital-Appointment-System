@@ -13,9 +13,13 @@ conn = mysql.connector.connect(user='root',
 
 mycursor=conn.cursor()
 
+# @app.route('/')
+# def enter():
+#     return render_template('welcome.html')
+
 @app.route('/')
 def enter():
-    return render_template('welcome.html')
+    return render_template('Bootstrap.html')
 
 @app.route('/admin_login')
 def home():
@@ -86,21 +90,18 @@ def add_doctor_details():
         mycursor.execute(sql,val)
         conn.commit()
         k=request.form.getlist('myval')
-        print('k', k)
         mycursor.execute('select doctorID from doctor_details where emailid=%s',[request.form['email']])
         doctorid=mycursor.fetchall()[0][0]
-        print(doctorid)
         print
         for i in k:
-            z=[]
-            z.append(int(doctorid))
-            z.append(int(i))
-            mycursor.execute('insert into d_s_mapping values (%d,%d) ',[int(doctorid),int(i)])
-        # mycursor.execute('select * from specialization')
-        # x=mycursor.fetchall()
-        # print('x',x)
+            doctorid=int(doctorid)
+            i=int(i)
+            mycursor.execute('insert into d_s_mapping values (%s,%s) ',[i,doctorid])
+            conn.commit()
         msg="Added " + request.form['fullname'] + " to the list of Doctors\'s in the Hospital."
-        return render_template('add_doctor_details.html',m=msg)
+        mycursor.execute('select * from specialization')
+        d=mycursor.fetchall()
+        return render_template('add_doctor_details.html',m=msg,data=d)
     else:
         msg="\""+request.form['email']+"\""+" already exists!"
         return render_template('add_doctor_details.html',m=msg)
@@ -109,7 +110,6 @@ def add_doctor_details():
 def display():
     mycursor.execute('select * from doctor_details order by doctorID desc ')
     x=mycursor.fetchall()
-    conn.close()
     return render_template('display_doctor_details.html',data=x)
 
 @app.route('/doctor_login')
