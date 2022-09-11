@@ -25,16 +25,17 @@ def signup():
     else:
 
         try:
-            sql = "INSERT INTO patient_details (fullname, emailid, gender, dob, pwd, contactno,address,state,city) VALUES (%s, %s, %s, %s,%s,%s,%s,%s,%s)"
+            sql = "INSERT INTO patient_details (fullname, emailid, gender, dob, pwd, contactno,address,state,city) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
             print("heyy")
-            val = [request.form['name'],request.form['emailid'], request.form['gender'],request.form['dob'] ,request.form['pwd'],request.form['contactno'],request.form['address'],request.form['state'],request.form['city']]
+            val = [request.form['fullname'],request.form['emailid'], request.form['gender'],request.form['dob'] ,request.form['pwd'],request.form['contactno'],request.form['address'],request.form['state'],request.form['city']]
             print("heyy")
             mycursor.executemany(sql, val)
             print("heyy final")
             conn.commit()
             errmsg='User registered!'
             return render_template("patientlog.html",msg=errmsg)
-        except:
+        except Exception as e:
+            print(e)
             return render_template("patientlog.html")
 
 
@@ -62,6 +63,29 @@ def signup():
 #             print("heyyy1111")
 #             errmsg='email already registered'
 #             return render_template("patientlog.html",msg=errmsg)
+@app.route("/patient_login",methods=["POST","GET"])
+def login():
+    
+    if request.method == "GET":
+        return render_template("patientlog.html")
+    else:
+        sql = "select * from patient_details where emailid=%s and binary pwd=%s"
+        val = [request.form['emailid'],request.form['pwd']]
+            
+        mycursor.execute(sql,val)
+
+        myresult = mycursor.fetchall()
+        conn.commit()
+        print("heyyy")
+        if len(myresult)==1:
+            session['loggedUser']=request.form['emailid']
+            print("heyyy 11")
+            return render_template("patientdashboard.html")
+        else:
+            return render_template("patientlog.html",msg="Incorrect credentials")
+
+
+
 
 @app.route('/admin_login')
 def home():
