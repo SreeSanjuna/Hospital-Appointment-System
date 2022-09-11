@@ -15,7 +15,29 @@ mycursor=conn.cursor()
 
 @app.route('/')
 def enter():
-    return render_template('Bootsrap.html')
+    return render_template('Bootstrap.html')
+
+@app.route("/patient_signup",methods=["POST","GET"])
+def signup():
+    if request.method == "GET":
+        return render_template("patientlog.html")
+    else:
+        try:
+            print("heyyy1")
+            sql = "INSERT INTO patient_details (fullname, emailid,gender,dob,pwd,contactno,address,state,city) VALUES ( %s, %s, %s,%s,%s,%s,%s,%s,%s)"
+            print("heyyy2")
+            val = [(request.form['name'],request.form['emailid'],request.form['gender'], request.form['dob'],request.form['pwd'] ,request.form['phone'],request.form['address'],request.form['state'],request.form['city'])]
+            print("heyyy3")
+            mycursor.execute(sql, val)
+            # print(mycursor)
+            conn.commit()
+            print("heyyy")
+            errmsg='email registered successfully'
+            return render_template("patientlog.html",msg=errmsg)
+        except:
+            print("heyyy1111")
+            errmsg='email already registered'
+            return render_template("patientlog.html",msg=errmsg)
 
 @app.route('/admin_login')
 def home():
