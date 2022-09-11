@@ -9,7 +9,7 @@ app.secret_key="abc"
 conn = mysql.connector.connect(user='root',
                                host='127.0.0.1',
                                database='doctorappoint',
-                               password='Sreesanjuna@2000')
+                               password='')
 # password='Sreesanjuna@2000'
 mycursor=conn.cursor()
 
@@ -27,7 +27,8 @@ def signup():
         try:
             sql = "INSERT INTO patient_details (fullname, emailid, gender, dob, pwd, contactno,address,state,city) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
             print("heyy")
-            val = [request.form['fullname'],request.form['emailid'], request.form['gender'],request.form['dob'] ,request.form['pwd'],request.form['contactno'],request.form['address'],request.form['state'],request.form['city']]
+            # val = (request.form['fullname'],request.form['emailid'], request.form['gender'],request.form['dob'] ,request.form['pwd'],request.form['contactno'],request.form['address'],request.form['state'],request.form['city'])
+            val = (request.form['fullname'],request.form['emailid'], request.form['gender'], request.form['dob'], request.form['pwd'],request.form['contactno'],request.form['address'],request.form['state'],request.form['city'])
             print("heyy")
             mycursor.executemany(sql, val)
             print("heyy final")
@@ -106,6 +107,46 @@ def do_admin_login():
     else:
         print('Wrong Password')
         return render_template('admin_error_password.html')
+    
+@app.route('/book_1')
+def book1():
+    return render_template('book_appointment.html')
+
+@app.route('/book_2',methods=['POST'])
+def book2():
+    print("hey")
+    sql='select sid from specialization where sname=%s'
+    # val=[request.form('spl')]
+    print("hey 2")
+    mycursor.execute(sql,request.form('spl'))
+    sid=mycursor.fetchone()
+    print("hey 3")
+    sql1='select doctorID from d_s_mapping where sid=%s'
+    val1=[sid[0]]
+    print("hey 4")
+    mycursor.execute(sql1,val1)
+    did=mycursor.fetchall()
+    print("hey 5")
+    d=[]
+    for i in did:
+        d.append(i)
+    d=tuple(d)
+    sql3='select fullname from doctor_details where doctorID in %s'
+    val3=[d]
+    print("hey 6")
+    mycursor.execute(sql3,val3)
+    fetchnames=mycursor.fetchall()
+    names=[]
+    print("hey 7")
+    for i in fetchnames:
+        names.append(i)
+    print("hey 8")
+    return render_template('book_2.html',spl=request.form('spl'), namelist=names)
+
+@app.route('/booking')
+def book3():
+    return render_template('patientdashboard.html')
+
 
 @app.route('/hi')
 def frgtpwd():
