@@ -1,0 +1,61 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display doctor details</title>
+</head>
+<body> -->
+    <!-- <table border="1" cellpadding="5" cellspacing="5">
+        {% for row in data %}
+            <tr>
+            {% for d in row %}
+                <td>{{ d }}</td>
+            {% endfor %}
+            </tr>
+        {% endfor %}
+    </table> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login Successful</title>
+</head>
+<body>
+    <a href="/specializations"><button>Add Specializations</button></a> <br>
+    <a href="/doctor_details"><button>Add Doctor Details</button></a> <br>
+    <!-- <a href="/admin/add_doctor_details"><button>Add Doctor Details</button></a> <br> -->
+    <form action ="/display" method="post">
+        <input type="submit" value="Display List of Doctors"/><br/>
+    </form>
+    <a href="/admin_logout"><button>Logout</button></a>
+
+    <h1 style="text-align: center; color:rgb(18, 164, 164) ;">List of Doctors in the organization</h1> <br>
+    <table border='1' style="border:border-collapse" margin="auto">
+        <th>DoctorID</th>
+        <th>Full Name</th>
+        <th>Qualification</th>
+        <th>Email ID</th>
+        <th>Contact Number</th>
+        <th>Consultancy Fee</th>
+        <th>Password</th>
+        <th>Address</th>
+        <th>City</th>
+        <th>State</th>
+        
+    {% for i in data : %}
+
+        <tr>
+            {% for j in i : %}
+                <td>{{j}}</td>
+            {% endfor %}
+        </tr>
+
+    {% endfor %}
+    </table>
+</body>
+</html>
