@@ -71,10 +71,8 @@ def login():
         return render_template("patientlog.html")
     else:
         sql = "select * from patient_details where emailid=%s and binary pwd=%s"
-        val = [request.form['emailid'],request.form['pwd']]
-            
+        val = [request.form['emailid'],request.form['pwd']]   
         mycursor.execute(sql,val)
-
         myresult = mycursor.fetchall()
         conn.commit()
         print("heyyy")
