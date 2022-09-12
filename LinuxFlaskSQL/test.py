@@ -168,8 +168,6 @@ def book3():
     return render_template('patientdashboard.html',msg="Booked successfully")
 @app.route('/appointment_history')
 def history():
-    # sql1='select patientID from patient_details where emailid=%s'
-    # val1=[session['loggeduser']]
     sql1='select patientID from patient_details where emailid=%s'
     val1=[session['loggeduser']]
     mycursor.execute(sql1,val1)
