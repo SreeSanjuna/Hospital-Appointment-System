@@ -170,11 +170,27 @@ def book3():
 def history():
     # sql1='select patientID from patient_details where emailid=%s'
     # val1=[session['loggeduser']]
-    # mycursor.execute(sql1,val1)
-    # print("heyy 2")
-    # patientid=mycursor.fetchone()[0]
-    # sql='select * from appointments where 
-    return render_template("patientdashboard.html")
+    sql1='select patientID from patient_details where emailid=%s'
+    val1=[session['loggeduser']]
+    mycursor.execute(sql1,val1)
+    print("heyy 2")
+    patientid=mycursor.fetchone()[0]
+    sql2='select * from appointments where patientID = %s'
+    val2=[patientid]
+    mycursor.execute(sql2,val2)
+    listapp=mycursor.fetchall()
+    print(listapp)
+    j=0
+    for i in listapp:
+        sql1='select fullname from doctor_details where doctorID = %s'
+        val1=[i[2]]
+        mycursor.execute(sql1,val1)
+        doctorname=mycursor.fetchone()[0]
+        listapp[j][2]=doctorname
+        j+=1
+    print(listapp)
+
+    return render_template("book_history.html",listapps=listapp)
 
 
 @app.route('/hi')
