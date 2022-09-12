@@ -25,14 +25,19 @@ def signup():
     else:
 
         try:
-            sql = "INSERT INTO patient_details (fullname, emailid, gender, dob, pwd, contactno,address,state,city) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
-            print("heyy")
-            # val = (request.form['fullname'],request.form['emailid'], request.form['gender'],request.form['dob'] ,request.form['pwd'],request.form['contactno'],request.form['address'],request.form['state'],request.form['city'])
-            val = [request.form['fullname'],request.form['emailid'], request.form['gender'], request.form['dob'], request.form['pwd'],request.form['contactno'],request.form['address'],request.form['state'],request.form['city']]
-            print("heyy")
-            mycursor.executemany(sql, val)
-            print("heyy final")
+            sql='insert into patient_details (fullname,emailid,gender,dob,pwd,contactno,address,state,city) values (%s,%s,%s,%s,%s,%s,%s,%s,%s)'
+            val=[request.form['fullname'],request.form['emailid'],request.form['gender'],request.form['dob'],request.form['pwd'],request.form['contactno'],request.form['address'],request.form['state'],request.form['city']]
+            mycursor.execute(sql,val)
             conn.commit()
+            # sql = "INSERT INTO patient_details (fullname, emailid, gender, dob, pwd, contactno,address,state,city) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+            print("heyy")
+
+            # val = (request.form['fullname'],request.form['emailid'], request.form['gender'],request.form['dob'] ,request.form['pwd'],request.form['contactno'],request.form['address'],request.form['state'],request.form['city'])
+            # val = [request.form['fullname'],request.form['emailid'], request.form['gender'], request.form['dob'], request.form['pwd'],request.form['contactno'],request.form['address'],request.form['state'],request.form['city']]
+            print("heyy")
+            # mycursor.executemany(sql, val)
+            print("heyy final")
+            # conn.commit()
             errmsg='User registered!'
             return render_template("patientlog.html",msg=errmsg)
         except Exception as e:
