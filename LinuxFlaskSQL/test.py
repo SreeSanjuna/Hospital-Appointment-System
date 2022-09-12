@@ -28,7 +28,7 @@ def signup():
             sql = "INSERT INTO patient_details (fullname, emailid, gender, dob, pwd, contactno,address,state,city) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
             print("heyy")
             # val = (request.form['fullname'],request.form['emailid'], request.form['gender'],request.form['dob'] ,request.form['pwd'],request.form['contactno'],request.form['address'],request.form['state'],request.form['city'])
-            val = (request.form['fullname'],request.form['emailid'], request.form['gender'], request.form['dob'], request.form['pwd'],request.form['contactno'],request.form['address'],request.form['state'],request.form['city'])
+            val = [request.form['fullname'],request.form['emailid'], request.form['gender'], request.form['dob'], request.form['pwd'],request.form['contactno'],request.form['address'],request.form['state'],request.form['city']]
             print("heyy")
             mycursor.executemany(sql, val)
             print("heyy final")
@@ -79,7 +79,7 @@ def login():
         conn.commit()
         print("heyyy")
         if len(myresult)==1:
-            session['loggedUser']=request.form['emailid']
+            session['loggeduser']=request.form['emailid']
             print("heyyy 11")
             return render_template("patientdashboard.html")
         else:
@@ -146,7 +146,26 @@ def book2():
 
 @app.route('/booking',methods=['POST'])
 def book3():
-    return render_template('patientdashboard.html',msg="Booked")
+    sql1='select doctorID from doctor_details where fullname=%s'
+    val1=[request.form['doctors']]
+    mycursor.execute(sql1,val1)
+    print("heyy 1")
+    doctorid=mycursor.fetchone()[0]
+    print(doctorid)
+    sql2='select patientID from patient_details where emailid=%s'
+    val2=[session['loggeduser']]
+    mycursor.execute(sql2,val2)
+    print("heyy 2")
+    patientid=mycursor.fetchone()[0]
+    sql3='insert into appointments(patientID,doctorID,a_date,a_time,reason) values(%s,%s,%s,%s,%s)'
+    val3=[patientid,doctorid,request.form['date'],request.form['time'],request.form['reason']]
+    mycursor.execute(sql3,val3)
+    print("heyy 3")
+    return render_template('patientdashboard.html',msg="Booked successfully")
+@app.route('/appointment_history')
+def history():
+    # sql='select * from appointments
+    return render_template("patientdashboard.html")
 
 
 @app.route('/hi')
