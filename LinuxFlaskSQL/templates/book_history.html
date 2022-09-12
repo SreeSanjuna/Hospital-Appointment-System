@@ -6,24 +6,24 @@
     <title>Document</title>
 </head>
 <body>
-<table>
-    <th>
+<table border="1">
+    <tr>
         <td>Doctor Name</td>
         <td>Date</td>
         <td>Time</td>
         <td>Reason</td>
         <td>Status</td>
-    </th>
-    <% for i in listapps %>
+    </tr>
+    {% for i in listapps: %}
     <tr>
         <td>{{i[2]}}</td>
-        <td>{{i[3]]}}</td>
+        <td>{{i[3]}}</td>
         <td>{{i[4]}}</td>
         <td>{{i[5]}}</td>
         <td>{{i[6]}}</td>
 
     </tr>
-    <% endfor %>
+    {% endfor %}
 </table>
 
 

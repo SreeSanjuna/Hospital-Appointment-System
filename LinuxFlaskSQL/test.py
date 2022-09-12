@@ -9,15 +9,15 @@ app.secret_key="abc"
 conn = mysql.connector.connect(user='root',
                                host='127.0.0.1',
                                database='doctorappoint',
-                               password='Sreesanjuna@2000')
-
+                               password='')
+# password='Sreesanjuna@2000'
 mycursor=conn.cursor()
 
 @app.route('/')
 def enter():
     return render_template('Bootstrap.html')
 
-<<<<<<< Updated upstream
+# <<<<<<< Updated upstream
 @app.route("/patient_signup",methods=["POST","GET"])
 def signup():
     if request.method == "GET":
@@ -92,8 +92,8 @@ def login():
 
 
 
-=======
->>>>>>> Stashed changes
+# =======
+# >>>>>>> Stashed changes
 @app.route('/admin_login')
 def home():
     if not session.get('logged_in'):
@@ -113,7 +113,11 @@ def do_admin_login():
     else:
         print('Wrong Password')
         return render_template('admin_error_password.html')
-    
+
+
+@app.route('/redirect')
+def topatient():
+    return render_template('patientdashboard.html')
 @app.route('/book_1')
 def book1():
     return render_template('book_appointment.html')
@@ -169,6 +173,8 @@ def book3():
     print("heyy 3")
     conn.commit()
     return render_template('patientdashboard.html',msg="Booked successfully")
+
+
 @app.route('/appointment_history')
 def history():
     sql1='select patientID from patient_details where emailid=%s'
@@ -180,6 +186,11 @@ def history():
     val2=[patientid]
     mycursor.execute(sql2,val2)
     listapp=mycursor.fetchall()
+    print(listapp)
+    j=0
+    for i in listapp:
+        listapp[j]=list(i)
+        j+=1
     print(listapp)
     j=0
     for i in listapp:
@@ -303,58 +314,6 @@ def doc_login():
         m='You have entered wrong Email ID!'
         return render_template('doclogin.html',msg=m)
 
-@app.route('/patient_signup')
-def patient():
-    msg=''
-    return render_template('patientlog.html',m=msg)
-
-@app.route('/patient/signup',methods=['POST','GET'])
-def signup():
-    mycursor.execute('select emailid from patient_details')
-    x=mycursor.fetchall()
-    if len(x)!=0:
-        l=[]
-        for i in x:
-            for j in i:
-                l.append(j)
-        if request.form['emailid'] not in l:
-            sql='insert into patient_details (fullname,emailid,gender,dob,pwd,contactno,address,state,city) values (%s,%s,%s,%s,%s,%s,%s,%s,%s)'
-            val=[request.form['fullname'],request.form['emailid'],request.form['gender'],request.form['dob'],request.form['pwd'],request.form['contactno'],request.form['address'],request.form['state'],request.form['city']]
-            mycursor.execute(sql,val)
-            conn.commit()
-            return render_template('patientlog.html',m='')
-        else:
-            msg="\""+request.form['emailid']+"\""+" already exists!"
-            return render_template('patientlog.html',m=msg)
-    else:
-        print('Entered!!')
-        sql='insert into patient_details (fullname,emailid,gender,dob,pwd,contactno,address,state,city) values (%s,%s,%s,%s,%s,%s,%s,%s,%s)'
-        val=[request.form['fullname'],request.form['emailid'],request.form['gender'],request.form['dob'],request.form['pwd'],request.form['contactno'],request.form['address'],request.form['state'],request.form['city']]
-        mycursor.execute(sql,val)
-        conn.commit()
-        print('#@!#!@#!@#!@#!@')
-        return render_template('patientdashboard.html')
-
-
-@app.route("/patient_login",methods=["POST","GET"])
-def login():
-    
-    if request.method == "GET":
-        return render_template("patientlog.html",msg='')
-    else:
-        sql = "select * from patient_details where emailid=%s and binary pwd=%s"
-        val = [request.form['emailid'],request.form['pwd']]   
-        mycursor.execute(sql,val)
-        myresult = mycursor.fetchall()
-        conn.commit()
-        if len(myresult)==1:
-            session['loggedUser']=request.form['emailid']
-            return render_template("patientdashboard.html")
-        else:
-            return render_template("patientlog.html",msg="Incorrect credentials")
-
-    
-
 @app.route("/admin_logout")
 def logout():
     session['logged_in'] = False
@@ -365,9 +324,9 @@ def doc_logout():
     session['logged_in'] = False
     return doctor()
 
-@app.route("/admin_logout")
-def patient_logout():
-    session['logged_in'] = False
-    return patient()
+# @app.route("/admin_logout")
+# def patient_logout():
+#     session['logged_in'] = False
+#     return patient()
 
 app.run()
