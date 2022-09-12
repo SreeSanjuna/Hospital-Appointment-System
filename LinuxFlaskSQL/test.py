@@ -9,7 +9,7 @@ app.secret_key="abc"
 conn = mysql.connector.connect(user='root',
                                host='127.0.0.1',
                                database='doctorappoint',
-                               password='Sreesanjuna@2000')
+                               password='')
 # password='Sreesanjuna@2000'
 mycursor=conn.cursor()
 
@@ -159,10 +159,16 @@ def book3():
     val3=[patientid,doctorid,request.form['date'],request.form['time'],request.form['reason']]
     mycursor.execute(sql3,val3)
     print("heyy 3")
+    conn.commit()
     return render_template('patientdashboard.html',msg="Booked successfully")
 @app.route('/appointment_history')
 def history():
-    # sql='select * from appointments
+    sql1='select patientID from patient_details where emailid=%s'
+    val1=[session['loggeduser']]
+    mycursor.execute(sql1,val1)
+    print("heyy 2")
+    patientid=mycursor.fetchone()[0]
+    # sql='select * from appointments where 
     return render_template("patientdashboard.html")
 
 
