@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Doctor Details</title>
+</head>
+<body>
+    
+    <a href="/doctor_details"><button>Add Doctor Details</button></a> <br>
+    <a href="/specializations"><button>Add Specializations</button></a> <br>
+    <!-- <a href="/admin/add_doctor_details"><button>Add Doctor Details</button></a> <br> -->
+    <form action ="/display" method="post">
+        <input type="submit" value="display"/><br/>
+    </form>
+
+    <h1 style="text-align: center; color:rgb(18, 164, 164) ;">Enter Doctor Details</h1> <br>
+    <table style="margin: auto;">
+    <form action="/admin/add_doctor_details" method="POST""> 
+            <tr>
+            <td colspan="2" style="text-align: center;"  style="text-align: center;">Full Name : <input type="text" name="fullname"></td>
+            </tr>
+            <tr>
+            <td>Qualification : <input type="text" name="qualification"></td>
+            <!-- Specialization : <select name='specialization' >  
+                <option value="--Select--" style="text-align: center;">- -  Select  - -</option>                                                                    
+                <option value='Allergist/Immunologists'>Allergist/Immunologists</option>                     
+                <option value='Anesthesiologist'>Anesthesiologist</option>           
+                <option value='Cardiologist'>Cardiologist</option>                     
+                <option value='Dermatologist'>Dermatologist</option>                                       
+                <option value='Endocrinologist'>Endocrinologist</option>                        
+                <option value='Emergency Physician'>Emergency Physician</option>
+                <option value="Gastroenterologist">Gastroenterologist</option>
+                <option value="OB/GYN">Gynaecologist/Obstetrician</option>
+                <option value="General Surgeon">General Surgeon</option>
+                <option value="Hematologist">Hematologist</option>
+                <option value="Nephrologist">Nephrologist</option>
+                <option value="Neurologist">Neurologist</option>
+                <option value="Oncologist">Oncologist</option>
+                <option value="Ophthalmologist">Ophthalmologist</option>
+                <option value="Orthopedist">Orthopedist</option>
+                <option value="Otolaryngologist (ENT)">Otolaryngologist (ENT)</option>
+                <option value="Pediatrician">Pediatrician</option>
+                <option value="Physiatrist">Physiatrist</option>
+                <option value="Podiatrist">Podiatrist</option>
+                <option value="Psychiatrist">Psychiatrist</option>
+                <option value="Pulmonologist">Pulmonologist</option>
+                <option value="Rheumatologist">Rheumatologist</option>
+                <option value="Urologist">Urologist</option>
+            </select> <br> <br> -->
+            
+            <td>Email ID : <input type="email" name="email"></td>
+            </tr>
+            <tr>
+            <td>Contact Number : <input type="text" name="contactno"></td>
+            <td>Consultancy Fee : <input type="text" name="consultancyfee"></td>
+            </tr>
+            <tr>
+            <td>Password : <input type="password" name="pwd"></td>
+            <td>Address : <input type="text" name="address"></td>
+            </tr>
+            <tr>
+            <td>City : <input type="text" name="city"></td>
+            <td>State : <input type="text" name="state"></td>
+            </tr>
+        <tr><td colspan="2" style="text-align: center;"  style="text-align: center;"><button>Add and Save</button></td></tr>
+    </form>
+    </table>
+
+        <h4 style="text-align: center;">{{m}}</h4>
+    <!-- <h2>Added the doctor details</h2> -->
+    <!-- <form action ="/display" method="post">
+        <input type="submit" value="display"/><br/>
+    </form> -->
+    
+</body>
+</html>

@@ -1,16 +1,12 @@
 <!doctype html>
 <html lang="en">
   <head>
-
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-    <!-- Icons Lib : Font Awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
     <title>Exp</title>
     <style>
@@ -157,31 +153,6 @@ a.article:hover {
     color: #fff !important;
 }
 
-footer {
-    background-color: #222;
-    color: #fff;
-    font-size: 10px;
-    bottom: 0;
-    position: flex;
-    left: 0;
-    right: 0;
-    text-align: center;
-    z-index: 999;
-}
-
-footer p {
-    margin: 9px 0;
-}
-
-footer i {
-    color: red;
-}
-
-footer a {
-    color: #3c97bf;
-    text-decoration: none;
-}
-
 /* ---------------------------------------------------
     CONTENT STYLE
 ----------------------------------------------------- */
@@ -220,30 +191,19 @@ footer a {
 
             <ul class="list-unstyled components">
                 <li>
-                    <a href="/admin_login">Admin Dashboard</a>
+                    <a href="#">Patient Dashboard</a>
                 </li>
                 <li>
                     <li>
-                        <a href="/specializations">Specialization</a>
-                    </li>
-                </li>
-                <li>
-                    <a href="/doctor_details">Doctors</a>
-                </li>
-                <li>
-                    <li>
-                        <a href="#">Patients</a>
+                        <a href="#">Book Appointment</a>
                     </li>
                 </li>
                 <li>
                     <a href="#">Appointment History</a>
                 </li>
                 <li>
-                    <li>
-                        <a href="#">Doctors Session Logs</a>
-                    </li>
+                    <a href="#">Prescription History</a>
                 </li>
-                
             </ul>
         </nav>
 
@@ -252,9 +212,10 @@ footer a {
 
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
+
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
-                            <li class="nav-item">
+                            <li class="nav-item active">
                                 <a class="nav-link" href="#">Page</a>
                             </li>
                             <li class="nav-item">
@@ -264,72 +225,67 @@ footer a {
                                 <a class="nav-link" href="#">Page</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/admin_logout">Logout</a>
+                                <a class="nav-link" href="#">Page</a>
                             </li>
                         </ul>
                     </div>
-                    
                 </div>
             </nav>
+            <div class="container">
+                <div class="row">
+                    <div style="text-align: center;" class="col-lg-3 col-md-4 col-sm-6">
 
-            <!-- Welcome Alert -->
-            <div class="alert alert-success">
-                <strong>Welcome!</strong> Admin 
+                        <div class="card">
+                            <img style="width: 150px;  display: block;
+                            margin-left: auto;
+                            margin-right: auto;
+                            width: 50%" src="./img/icons8-male-user-96.png" alt="img" class="img-fluid">
+                            <div class="card-body">
+                                <h3 class="card-title">My Profile</h3>
+                                <a href="#" class="card-link stretched-link">Update Profile</a>
+    
+                            </div>
+                        </div>
+    
+    
+                    </div>
+                    <div style="text-align: center;" class="col-lg-3 col-md-4 col-sm-6">
+
+                        <div class="card">
+                            <img style="width: 150px;  display: block;
+                            margin-left: auto;
+                            margin-right: auto;
+                            width: 50%" src="./img/icons8-add-folder-96.png" alt="img" class="img-fluid">
+                            <div class="card-body">
+                                <h3 class="card-title">My Appointments</h3>
+                                <a href="#" class="card-link stretched-link">View Appointment History</a>
+    
+                            </div>
+                        </div>
+    
+    
+                    </div>
+                    <div style="text-align: center;" class="col-lg-3 col-md-4 col-sm-6">
+
+                        <div class="card">
+                            <img style="width: 150px;  display: block;
+                            margin-left: auto;
+                            margin-right: auto;
+                            width: 50%" src="./img/icons8-event-accepted-96.png" alt="img" class="img-fluid">
+                            <div class="card-body">
+                                <h3 class="card-title">Book My Appointment</h3>
+                                <a href="#" class="card-link stretched-link">Book Appointment</a>
+    
+                            </div>
+                        </div>
+    
+    
+                    </div>
+                </div>
+
             </div>
-
-
-
-            
-                <div>
-                    <h1 style="text-align: center; color:rgb(18, 164, 164) ; content: center; margin: auto;">Enter Doctor Details</h1> <br> <br>
-                    <h1></h1>
-                    <table style="margin: auto;">
-                        <form action="/admin/add_doctor_details" method="POST""> 
-                                <tr><p>
-                                <td colspan="2" "  style="text-align: center;">Full Name : <input type="text" name="fullname"></td>
-                                </tr></p>
-                                <tr><p>
-                                <td>Qualification : <input type="text" name="qualification"></td>
-                                        
-                                <td>Email ID : <input type="email" name="email"></td>
-                                </p></tr>
-                                <tr><p>
-                                <td>Contact Number : <input type="text" name="contactno"></td>
-                                <td>Consultancy Fee : <input type="text" name="consultancyfee"></td>
-                                </p></tr>
-                                <tr><p>
-                                <td>Password : <input type="password" name="pwd"></td>
-                                <td>Address : <input type="text" name="address"></td>
-                                </p></tr>
-                                <tr><p>
-                                <td>City : <input type="text" name="city"></td>
-                                <td>State : <input type="text" name="state"></td>
-                                </p></tr>
-                            <!-- <tr><td colspan="2" style="text-align: center;"  style="text-align: center;"><button>Add and Save</button></td></tr> -->
-                            <tr><td colspan="2">Specialization</td></tr>
-                            {% for i in data: %}
-                            <tr><td >
-                            <tr><td colspan="2">
-                                <input type="checkbox" name="myval" value="{{i[0]}}">{{i[1]}}
-                            </tr></td>
-                            {% endfor %}
-                            <tr><td colspan="2" rowspan="2"><input type="submit" value="Submit"></td></tr>
-                        </form>
-                        </table>
-                    
-                            <h4 style="text-align: center;">{{m}}</h4>
-                        
-            </div>
-
         </div>
     </div>
-    <footer>
-        <p>
-            Created by <i class="fa fa-heart"></i>
-            <a target="_blank" href="#">FD2ISV ©Copyright 2022</a>
-        </p>
-    </footer>
-
     <script>
         $(document).ready(function () {
             $('#sidebarCollapse').on('click', function () {

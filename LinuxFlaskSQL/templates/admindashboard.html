@@ -280,45 +280,56 @@ footer a {
 
 
             
-                <div>
-                    <h1 style="text-align: center; color:rgb(18, 164, 164) ; content: center; margin: auto;">Enter Doctor Details</h1> <br> <br>
-                    <h1></h1>
-                    <table style="margin: auto;">
-                        <form action="/admin/add_doctor_details" method="POST""> 
-                                <tr><p>
-                                <td colspan="2" "  style="text-align: center;">Full Name : <input type="text" name="fullname"></td>
-                                </tr></p>
-                                <tr><p>
-                                <td>Qualification : <input type="text" name="qualification"></td>
-                                        
-                                <td>Email ID : <input type="email" name="email"></td>
-                                </p></tr>
-                                <tr><p>
-                                <td>Contact Number : <input type="text" name="contactno"></td>
-                                <td>Consultancy Fee : <input type="text" name="consultancyfee"></td>
-                                </p></tr>
-                                <tr><p>
-                                <td>Password : <input type="password" name="pwd"></td>
-                                <td>Address : <input type="text" name="address"></td>
-                                </p></tr>
-                                <tr><p>
-                                <td>City : <input type="text" name="city"></td>
-                                <td>State : <input type="text" name="state"></td>
-                                </p></tr>
-                            <!-- <tr><td colspan="2" style="text-align: center;"  style="text-align: center;"><button>Add and Save</button></td></tr> -->
-                            <tr><td colspan="2">Specialization</td></tr>
-                            {% for i in data: %}
-                            <tr><td >
-                            <tr><td colspan="2">
-                                <input type="checkbox" name="myval" value="{{i[0]}}">{{i[1]}}
-                            </tr></td>
-                            {% endfor %}
-                            <tr><td colspan="2" rowspan="2"><input type="submit" value="Submit"></td></tr>
-                        </form>
-                        </table>
-                    
-                            <h4 style="text-align: center;">{{m}}</h4>
-                        
+
+            <div class="row text-center">
+                    <div class="col-xs-2 col-sm-6 col-md-3 col-lg-4 col-xl-6 card">
+                        <i class="fas fa-user" style="font-size:60px;color:black ;margin: 5%;"
+                        style="margin-top: 1%;">
+                        </i>
+                        <div class="card-body">
+                            <h3 class="card-title">Specialization</h3>
+                            <a href="/specializations" class="card-link stretched-link">Find you specialist</a>
+                        </div>
+                    </div>
+                    <div class="col-xs-2 col-sm-6 col-md-3 col-lg-4 col-xl-6 card justify-content-center">
+                        <i class="fas fa-list" style="font-size:60px;color:black ;margin: 5%;">
+                        </i>
+                        <div class="card-body">
+                            <h3 class="card-title">Doctors</h3>
+                            <a href="/disp" class="card-link stretched-link">List of verified Doctors</a>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-2 col-sm-6 col-md-3 col-lg-4 col-xl-6 card justify-content-center"
+                    style="margin-top: 1%;">
+                        <i class="fas fa-list" style="font-size:60px;color:black ;margin: 5%;">
+                        </i>
+                        <div class="card-body">
+                            <h3 class="card-title">Patients</h3>
+                            <a href="#" class="card-link stretched-link">List of genuine patients</a>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-2 col-sm-6 col-md-3 col-lg-4 col-xl-6 card justify-content-center"
+                    style="margin-top: 1%;">
+                        <i class="fas fa-list" style="font-size:60px;color:black ;margin: 5%;">
+                        </i>
+                        <div class="card-body">
+                            <h3 class="card-title">Appointment history</h3>
+                            <a href="#" class="card-link stretched-link">All the apointments records</a>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-2 col-sm-6 col-md-3 col-lg-4 col-xl-6 col-md-offset-3 card justify-content-center"
+                    style="margin: auto 25%;margin-top: 1%;">
+                        <i class="fas fa-list" style="font-size:60px;color:black ;margin: 5%;">
+                        </i>
+                        <div class="card-body">
+                            <h3 class="card-title">Doctors session logs</h3>
+                            <a href="#" class="card-link stretched-link">List of genuine patients</a>
+                        </div>
+                    </div>
+
             </div>
 
         </div>
