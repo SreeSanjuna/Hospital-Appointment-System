@@ -116,9 +116,9 @@ def book1():
 def book2():
     print("hey")
     sql='select sid from specialization where sname=%s'
-    # val=[request.form('spl')]
+    val=[request.form['special']]
     print("hey 2")
-    mycursor.execute(sql,request.form('spl'))
+    mycursor.execute(sql,val)
     sid=mycursor.fetchone()
     print("hey 3")
     sql1='select doctorID from d_s_mapping where sid=%s'
@@ -130,22 +130,23 @@ def book2():
     d=[]
     for i in did:
         d.append(i)
-    d=tuple(d)
-    sql3='select fullname from doctor_details where doctorID in %s'
-    val3=[d]
-    print("hey 6")
-    mycursor.execute(sql3,val3)
-    fetchnames=mycursor.fetchall()
     names=[]
-    print("hey 7")
-    for i in fetchnames:
-        names.append(i)
+    print(d[1])
+    for i in d:
+        sql3='select fullname from doctor_details where doctorID = %s'
+        # val3=i
+        print("hey 6")
+        mycursor.execute(sql3,i)
+        fetchnames=mycursor.fetchone()
+        print("hey 7")
+        names.append(fetchnames[0])
+        
     print("hey 8")
-    return render_template('book_2.html',spl=request.form('spl'), namelist=names)
+    return render_template('book_2.html',spl=request.form['special'], namelist=names)
 
-@app.route('/booking')
+@app.route('/booking',methods=['POST'])
 def book3():
-    return render_template('patientdashboard.html')
+    return render_template('patientdashboard.html',msg="Booked")
 
 
 @app.route('/hi')
