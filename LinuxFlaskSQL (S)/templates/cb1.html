@@ -7,9 +7,25 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Hiiiiiii</h1>
-    <!-- <form action="/#" method="post">
-        <h1>Hiii</h1>
-    </form> -->
+    <form action="/patient/signup" method="post">
+        <h1>Create Account</h1>
+        <!-- <div class="social-container">
+            <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+            <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+        </div> -->
+        <!-- <span>or use your email for registration</span> -->
+        <input type="text" name="fullname" placeholder="Name" />
+        <input type="text" name="gender" placeholder="Gender" />
+        <input type="tel" name="contactno" placeholder="Phone" />
+        <input placeholder="DOB" name="dob" type="text" onfocus="(this.type = 'date')" >
+        <input type="email" name="emailid" placeholder="Email" />
+        <input type="password" name="pwd" placeholder="Password" id="pass"/>
+        <!-- <input type="password" name="" placeholder="Confirm Password" id="re_pass"/> -->
+        <input type="text" name="address" placeholder="Address" />
+        <input type="text" name="city" placeholder="City" />
+        <input type="text" name="state" placeholder="State" /></br>
+        <button>Sign Up</button>
+    </form>
 </body>
 </html>
