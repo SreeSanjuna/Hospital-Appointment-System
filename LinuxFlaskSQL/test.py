@@ -131,7 +131,7 @@ def book2():
     for i in did:
         d.append(i)
     names=[]
-    print(d[1])
+    print(d[1][0])
     for i in d:
         sql3='select fullname from doctor_details where doctorID = %s'
         # val3=i

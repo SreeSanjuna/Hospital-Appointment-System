@@ -9,8 +9,8 @@
     
 
 <form action="/booking" method="POST">
-    <input type="text" name="spl" value="{{spl}}" id="">
-    <select name="doctors" id="">
+    <input type="text" name="spl" value="{{spl}}" id="" readonly>
+    <select name="doctors" id="" value="">
         {% for i in namelist: %}
         <option value="{{i}}">{{i}}</option>
         {% endfor %}
