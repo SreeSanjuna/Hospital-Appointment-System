@@ -1,8 +1,5 @@
 <html>
 <head>
-    <title>
-        Admin Login
-    </title>
 <style>
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 
@@ -168,12 +165,12 @@ input {
 }
 
 .overlay {
-	background: #1fd4cb;
-	background: -webkit-linear-gradient(to right, #3c97bf, #1fd4cb);
-	background: linear-gradient(to right, #3c97bf, #1fd4cb);
 	/* background: #FF416C;
 	background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
 	background: linear-gradient(to right, #FF4B2B, #FF416C); */
+	background: #1fd4cb;
+	background: -webkit-linear-gradient(to right, #3c97bf, #1fd4cb);
+	background: linear-gradient(to right, #3c97bf, #1fd4cb);
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: 0 0;
@@ -226,7 +223,7 @@ input {
 	margin: 20px 0;
 }
 
-/* .social-container a {
+.social-container a {
 	border: 1px solid #DDDDDD;
 	border-radius: 50%;
 	display: inline-flex;
@@ -235,7 +232,7 @@ input {
 	margin: 0 5px;
 	height: 40px;
 	width: 40px;
-} */
+}
 
 footer {
     background-color: #222;
@@ -265,20 +262,58 @@ footer a {
 </head>
 <body>
 <div class="container" id="container">
+	<div class="form-container sign-up-container">
+		<form action="/patient/signup" method="post">
+			<h1>Create Account</h1>
+			<p style="color: #FF4B2B;">{{m}}</p>
+			<!-- <div class="social-container">
+				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+			</div> -->
+			<!-- <span>or use your email for registration</span> -->
+			<input type="text" name="fullname" placeholder="Name" />
+			<input type="text" name="gender" placeholder="Gender" />
+			<input type="tel" name="contactno" maxlength="10" minlength="10" placeholder="Phone" />
+			<input placeholder="DOB" name="dob" type="text" onfocus="(this.type = 'date')" >
+			<input type="email" name="emailid" placeholder="Email" />
+			<input type="password" name="pwd" placeholder="Password" id="pass"/>
+			<!-- <input type="password" name="" placeholder="Confirm Password" id="re_pass"/> -->
+			<input type="text" name="address" placeholder="Address" />
+			<input type="text" name="city" placeholder="City" />
+			<input type="text" name="state" placeholder="State" /></br>
+			<button>Sign Up</button>
+		</form>
+	</div>
 	<div class="form-container sign-in-container">
-		<form action="/adminlogin" method="POST" id="login-form">
+		<form action="/patient_login" method="post">
 			<h1>Sign in</h1>
-			<input type="email" name="email" placeholder="Email"  required />
-			<input type="password" name="pwd" placeholder="Password"  required />
+			<p style="color: #FF4B2B;">{{msg}}</p>
+			<!-- <div class="social-container">
+				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+			</div> -->
+			<!-- <span>or use your account</span> -->
+			<input type="email" placeholder="Email"  name="emailid" />
+			<input type="password" placeholder="Password"  name="pwd" />
 			<a href="/hi">Forgot your password?</a>
 			<button>Sign In</button>
 		</form>
 	</div>
 	<div class="overlay-container">
 		<div class="overlay">
+			<div class="overlay-panel overlay-left">
+				<h1>Welcome Back!</h1>
+				<p>To keep connected with us please login with your personal info</p>
+				<p style="color: #ece509;">{{msg}}</p>
+				<button class="ghost" id="signIn">Sign In</button>
+			</div>
 			<div class="overlay-panel overlay-right">
-				<h1>Hello Admin!</h1>
-				<p>Enter your personal details and get</br>logged in</p>
+				<h1>Hello, User!</h1>
+				<p>Enter your personal details and start journey with us</p>
+				<p style="color: #ece509;">{{m}}</p>
+				<button class="ghost" id="signUp">Sign Up</button>
 			</div>
 		</div>
 	</div>
@@ -290,7 +325,18 @@ footer a {
 		<a target="_blank" href="#">FD2ISV ©Copyright 2022</a>
 	</p>
 </footer>
+<script>
+const signUpButton = document.getElementById('signUp');
+const signInButton = document.getElementById('signIn');
+const container = document.getElementById('container');
+
+signUpButton.addEventListener('click', () => {
+	container.classList.add("right-panel-active");
+});
+
+signInButton.addEventListener('click', () => {
+	container.classList.remove("right-panel-active");
+});
+</script>
 </body>
 </html>
-
-

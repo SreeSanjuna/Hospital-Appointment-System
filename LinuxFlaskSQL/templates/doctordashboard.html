@@ -12,7 +12,7 @@
     <!-- Icons Lib : Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
-    <title>Admin Dashboard</title>
+    <title>Doctor Dashboard</title>
     <style>
         /*
     DEMO STYLE
@@ -162,7 +162,7 @@ footer {
     color: #fff;
     font-size: 10px;
     bottom: 0;
-    position: flex;
+    position: fixed;
     left: 0;
     right: 0;
     text-align: center;
@@ -215,33 +215,20 @@ footer a {
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3 style="text-align: center;">Admin Management Portal</h3>
+                <h3>Doctor Management Portal</h3>
             </div>
 
             <ul class="list-unstyled components">
                 <li>
-                    <a href="/admin_login">Admin Dashboard</a>
+                    <a href="/doctor_login">Doctor Dashboard</a>
                 </li>
                 <li>
                     <li>
-                        <a href="/specializations">Specialization</a>
+                        <a href="#">Your Profile</a>
                     </li>
                 </li>
                 <li>
-                    <a href="/doctor_details">Doctors</a>
-                </li>
-                <li>
-                    <li>
-                        <a href="/patient_display">Patients</a>
-                    </li>
-                </li>
-                <li>
-                    <a href="/appointment_disp">Appointment History</a>
-                </li>
-                <li>
-                    <li>
-                        <a href="#">Doctors Session Logs</a>
-                    </li>
+                    <a href="#">Your Schedule</a>
                 </li>
                 
             </ul>
@@ -254,17 +241,17 @@ footer a {
                 <div class="container-fluid">
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
-                            <!-- <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
-                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Page</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Page</a>
-                            </li> -->
+                            </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/admin_logout">Logout</a>
+                                <a class="nav-link" href="#">Update Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/doctor_logout">Logout</a>
                             </li>
                         </ul>
                     </div>
@@ -274,62 +261,73 @@ footer a {
 
             <!-- Welcome Alert -->
             <div class="alert alert-success">
-                <strong>Welcome!</strong> Admin 
+                <strong>Welcome!</strong> {{name}} <!-- Dr. Name-->
             </div>
 
 
 
-            
+            <!-- <div class="container">
+                <div class="row">
+                    <div style="text-align: center;" class="col-lg-3 col-md-4 col-sm-6">
+
+                        <div class="card">
+                            <img style="width: 150px;  display: block;
+                            margin-left: auto;
+                            margin-right: auto;
+                            width: 50%" src="./img/icons8-male-user-96.png" alt="img" class="img-fluid">
+                            <div class="card-body">
+                                <h3 class="card-title">My Profile</h3>
+                                <a href="#" class="card-link stretched-link">Update Profile</a>
+    
+                            </div>
+                        </div>
+    
+    
+                    </div> -->
+
+
+
+            <!-- Grid  -->
+            <!-- <div class="container">
+                <div class="row align-items-center ">
+                    <div class="card">
+                        <div class="col text-center">
+                            <span class="fa-stack fa-lg" style="font-size:60px;color:#C0C0C0 ;">
+                                <i class="fa fa-circle-thin fa-stack-2x" style="color:black;"></i>
+                                <i class="fas fa-user fa-stack-1x"></i>
+                            </span>
+                            <p>My Profile</p>
+                        </div>
+                    </div> 
+                    <div class="card">
+                        <div class="col col-md-offset-2 text-center">
+                            <span class="fa-stack fa-lg" style="font-size:60px;color:#C0C0C0 ;">
+                                <i class="fa fa-circle-thin fa-stack-2x" ></i>
+                                <i class="fas fa-list fa-stack-1x"></i>
+                            </span>
+                            <p>My Appointments</p>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
 
             <div class="row text-center">
                     <div class="col-xs-2 col-sm-6 col-md-3 col-lg-4 col-xl-6 card">
-                        <i class="fas fa-user" style="font-size:60px;color:black ;margin: 5%;"
-                        style="margin-top: 1%;">
+                        <i class="fas fa-user" style="font-size:60px;color:black ;margin: 5%;">
                         </i>
                         <div class="card-body">
-                            <h3 class="card-title">Specialization</h3>
-                            <a href="/specializations" class="card-link stretched-link">Find you specialist</a>
+                            <h3 class="card-title">My Profile</h3>
+                            <a href="#" class="card-link stretched-link">View Appointment History</a>
                         </div>
                     </div>
                     <div class="col-xs-2 col-sm-6 col-md-3 col-lg-4 col-xl-6 card justify-content-center">
                         <i class="fas fa-list" style="font-size:60px;color:black ;margin: 5%;">
                         </i>
                         <div class="card-body">
-                            <h3 class="card-title">Doctors</h3>
-                            <a href="/disp" class="card-link stretched-link">List of verified Doctors</a>
+                            <h3 class="card-title">My Appointments</h3>
+                            <a href="#" class="card-link stretched-link">View Appointment History</a>
                         </div>
                     </div>
-
-                    <div class="col-xs-2 col-sm-6 col-md-3 col-lg-4 col-xl-6 card justify-content-center"
-                    style="margin-top: 1%;">
-                        <i class="fas fa-list" style="font-size:60px;color:black ;margin: 5%;">
-                        </i>
-                        <div class="card-body">
-                            <h3 class="card-title">Patients</h3>
-                            <a href="/patient_display" class="card-link stretched-link">List of genuine patients</a>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-2 col-sm-6 col-md-3 col-lg-4 col-xl-6 card justify-content-center"
-                    style="margin-top: 1%;">
-                        <i class="fas fa-list" style="font-size:60px;color:black ;margin: 5%;">
-                        </i>
-                        <div class="card-body">
-                            <h3 class="card-title">Appointment history</h3>
-                            <a href="/appointment_disp" class="card-link stretched-link">All the appointments records</a>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-2 col-sm-6 col-md-3 col-lg-4 col-xl-6 col-md-offset-3 card justify-content-center"
-                    style="margin: auto 25%;margin-top: 1%;">
-                        <i class="fas fa-list" style="font-size:60px;color:black ;margin: 5%;">
-                        </i>
-                        <div class="card-body">
-                            <h3 class="card-title">Doctors session logs</h3>
-                            <a href="#" class="card-link stretched-link">List of genuine patients</a>
-                        </div>
-                    </div>
-
             </div>
 
         </div>

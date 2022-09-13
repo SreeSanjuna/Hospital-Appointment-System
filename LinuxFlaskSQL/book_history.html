@@ -1,0 +1,33 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="/logout"><button>Logout</button></a><br>
+<table border="1">
+    <tr>
+        <td>Doctor Name</td>
+        <td>Date</td>
+        <td>Time</td>
+        <td>Reason</td>
+        <td>Status</td>
+    </tr>
+    {% for i in listapps: %}
+    <tr>
+        <td>{{i[2]}}</td>
+        <td>{{i[3]}}</td>
+        <td>{{i[4]}}</td>
+        <td>{{i[5]}}</td>
+        <td>{{i[6]}}</td>
+
+    </tr>
+    {% endfor %}
+</table>
+
+
+    
+</body>
+</html>

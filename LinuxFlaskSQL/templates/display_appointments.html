@@ -12,7 +12,7 @@
     <!-- Icons Lib : Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
-    <title>Admin Dashboard</title>
+    <title>Display the List of Doctor's</title>
     <style>
         /*
     DEMO STYLE
@@ -215,7 +215,7 @@ footer a {
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3 style="text-align: center;">Admin Management Portal</h3>
+                <h3>Doctor Management Portal</h3>
             </div>
 
             <ul class="list-unstyled components">
@@ -254,15 +254,15 @@ footer a {
                 <div class="container-fluid">
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
-                            <!-- <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
-                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Page</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Page</a>
-                            </li> -->
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Page</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/admin_logout">Logout</a>
                             </li>
@@ -280,56 +280,28 @@ footer a {
 
 
             
+                <div>
+                    <!-- <a href="/doctor_details"><button>Add Doctor Details</button></a> -->
+                    <h1 style="text-align: center; color:rgb(18, 164, 164) ;">Appointments</h1> <br>
+                    <table border='1' style="border:border-collapse" margin="auto">
+                        <th>Patient ID</th>
+                        <th>Name of the Patient</th>
+                        <th>Name of the Doctor</th>
+                        <th>Appointment Date</th>
+                        <th>Appointment Time</th>
+                        <th>Reason</th>
+                        <th>Appointment Status</th>
+                        
+                    {% for i in data : %}
 
-            <div class="row text-center">
-                    <div class="col-xs-2 col-sm-6 col-md-3 col-lg-4 col-xl-6 card">
-                        <i class="fas fa-user" style="font-size:60px;color:black ;margin: 5%;"
-                        style="margin-top: 1%;">
-                        </i>
-                        <div class="card-body">
-                            <h3 class="card-title">Specialization</h3>
-                            <a href="/specializations" class="card-link stretched-link">Find you specialist</a>
-                        </div>
-                    </div>
-                    <div class="col-xs-2 col-sm-6 col-md-3 col-lg-4 col-xl-6 card justify-content-center">
-                        <i class="fas fa-list" style="font-size:60px;color:black ;margin: 5%;">
-                        </i>
-                        <div class="card-body">
-                            <h3 class="card-title">Doctors</h3>
-                            <a href="/disp" class="card-link stretched-link">List of verified Doctors</a>
-                        </div>
-                    </div>
+                        <tr>
+                            {% for j in i : %}
+                                <td>{{j}}</td>
+                            {% endfor %}
+                        </tr>
 
-                    <div class="col-xs-2 col-sm-6 col-md-3 col-lg-4 col-xl-6 card justify-content-center"
-                    style="margin-top: 1%;">
-                        <i class="fas fa-list" style="font-size:60px;color:black ;margin: 5%;">
-                        </i>
-                        <div class="card-body">
-                            <h3 class="card-title">Patients</h3>
-                            <a href="/patient_display" class="card-link stretched-link">List of genuine patients</a>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-2 col-sm-6 col-md-3 col-lg-4 col-xl-6 card justify-content-center"
-                    style="margin-top: 1%;">
-                        <i class="fas fa-list" style="font-size:60px;color:black ;margin: 5%;">
-                        </i>
-                        <div class="card-body">
-                            <h3 class="card-title">Appointment history</h3>
-                            <a href="/appointment_disp" class="card-link stretched-link">All the appointments records</a>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-2 col-sm-6 col-md-3 col-lg-4 col-xl-6 col-md-offset-3 card justify-content-center"
-                    style="margin: auto 25%;margin-top: 1%;">
-                        <i class="fas fa-list" style="font-size:60px;color:black ;margin: 5%;">
-                        </i>
-                        <div class="card-body">
-                            <h3 class="card-title">Doctors session logs</h3>
-                            <a href="#" class="card-link stretched-link">List of genuine patients</a>
-                        </div>
-                    </div>
-
+                    {% endfor %}
+                    </table>          
             </div>
 
         </div>
