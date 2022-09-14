@@ -12,7 +12,7 @@
     <!-- Icons Lib : Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
-    <title>Doctor Dashboard</title>
+    <title>Admin Dashboard</title>
     <style>
         /*
     DEMO STYLE
@@ -162,7 +162,7 @@ footer {
     color: #fff;
     font-size: 10px;
     bottom: 0;
-    position: fixed;
+    position: flex;
     left: 0;
     right: 0;
     text-align: center;
@@ -215,91 +215,100 @@ footer a {
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3>Doctor Management Portal</h3>
+                <h3 style="text-align: center;">Admin Management Portal</h3>
             </div>
 
             <ul class="list-unstyled components">
                 <li>
-                    <a href="/doctor_login">Doctor Dashboard</a>
+                    <a href="/admin_login">Admin Dashboard</a>
                 </li>
                 <li>
                     <li>
-                        <a href="/doctor_profile_view">My Profile</a>
+                        <a href="/specializations">Specialization</a>
                     </li>
                 </li>
                 <li>
-                    <a href="/doctor_appoint">Appointments</a>
+                    <a href="/doctor_details">Doctors</a>
+                </li>
+                <li>
+                    <li>
+                        <a href="/patient_display">Patients</a>
+                    </li>
+                </li>
+                <li>
+                    <a href="/appointment_disp">Appointment History</a>
+                </li>
+                <li>
+                    <li>
+                        <a href="/doc_sess_disp">Doctors Session Logs</a>
+                    </li>
+                </li>
+                <li>
+                    <li>
+                        <a href="/user_com">User comments</a>
+                    </li>
                 </li>
                 
             </ul>
         </nav>
+
+        <!-- Page Content  -->
         <div id="content">
 
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
-                            <!-- <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
-                            </li> -->
-                            <!-- <li class="nav-item">
-                                <a class="nav-link" href="/doctor_profile_view">My Profile</a>
-                            </li> -->
+                            
                             <li class="nav-item">
-                                <a class="nav-link" href="/doctor_profile">Update Profile</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/doctor_logout">Logout</a>
+                                <a class="nav-link" href="/admin_logout">Logout</a>
                             </li>
                         </ul>
                     </div>
                     
                 </div>
             </nav>
-            <p style='color:red;' text-align="center">{{msg}}</p>
-    <form action="/search_option" method="POST">
-            <div><select name="opt" id="" required>
-                <option disabled >--Select an option--</option>
-        <option value="pending">pending</option>
-        <option value="confirm">confirmed</option>
-        <option value="visited">visited</option>
-        <option value="disapproved">disapproved</option>
-        <option value="active">active</option>
-        <input type="submit" value="Search" name="" id="">
-    </select></div>
-</form>
-    <table>
-        <th>
-            <td>Sl.No</td>
-            <td>Patient Name</td>
-            <td>Appointment date</td>
-            <td>Appointment time</td>
-            <td>Reason</td>
-            <td>Status</td>
-            <td>Action</td>
-            <td>delete</td>
-        </th>
-        
-        
-            {% for i in range(0,j): %}
-            <tr>
-            <td>{{i+1}}</td>
-            <td>{{pname[i]}}</td>   
-            <td>{{appoints[i][3]}}</td>   
-            <td>{{appoints[i][4]}}</td>   
-            <td>{{appoints[i][5]}}</td>   
-            <td>{{appoints[i][6]}}</td>
-            <form action="/change_status" method="POST">
-        <input type="text" name="aid" value="{{appoints[i][0]}}" id="" hidden>
-        <td><input type="submit" name="" id="" value="{{acts[appoints[i][6]]}}" /></td></form>
-    <form action="/delete_appoint" method="POST">
-        <input type="text" name="aid" value="{{appoints[i][0]}}" id="" hidden>
-        <td><input type="submit" name="del" value="disapprove" id=""></td>
-        </form>
-    </tr>
-            {% endfor %}
-        
-    </table>
+
+            <!-- Welcome Alert -->
+            <div class="alert alert-success">
+                <strong>Welcome!</strong> Admin 
+            </div>
+
+            <table>
+                <th>
+                    <td>Sl.No</td>
+                    <td>Name</td>
+                    <td>EmailId</td>
+                    <td>Message</td>
+                </th>
+                {% for i in dis: %} 
+                <tr>
+                    <td>{{i[0]}}</td>
+                    <td>{{i[1]}}</td>
+                    <td>{{i[2]}}</td>
+                    <td>{{i[3]}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+
+            
+
+            
+                       
+
+                   
+
+                    
+
+                    
+
+            </div>
+
+        </div>
+    </div>
+
+
+
     <footer>
         <p>
             Created by <i class="fa fa-heart"></i>

@@ -257,20 +257,11 @@ footer a {
                 </div>
             </nav>
             <p style='color:red;' text-align="center">{{msg}}</p>
-    <form action="/search_option" method="POST">
-            <div><select name="opt" id="" required>
-                <option disabled >--Select an option--</option>
-        <option value="pending">pending</option>
-        <option value="confirm">confirmed</option>
-        <option value="visited">visited</option>
-        <option value="disapproved">disapproved</option>
-        <option value="active">active</option>
-        <input type="submit" value="Search" name="" id="">
-    </select></div>
-</form>
+    
+<!-- </form> -->
     <table>
         <th>
-            <td>Sl.No</td>
+            <!-- <td>SL.No</td> -->
             <td>Patient Name</td>
             <td>Appointment date</td>
             <td>Appointment time</td>
@@ -281,19 +272,19 @@ footer a {
         </th>
         
         
-            {% for i in range(0,j): %}
+            {% for i in appoints: %}
             <tr>
-            <td>{{i+1}}</td>
-            <td>{{pname[i]}}</td>   
-            <td>{{appoints[i][3]}}</td>   
-            <td>{{appoints[i][4]}}</td>   
-            <td>{{appoints[i][5]}}</td>   
-            <td>{{appoints[i][6]}}</td>
+            <!-- <td>{{j+1}}</td> -->
+            <td>{{pname[j]}}</td>   
+            <td>{{i[3]}}</td>   
+            <td>{{i[4]}}</td>   
+            <td>{{i[5]}}</td>   
+            <td>{{i[6]}}</td>
             <form action="/change_status" method="POST">
-        <input type="text" name="aid" value="{{appoints[i][0]}}" id="" hidden>
-        <td><input type="submit" name="" id="" value="{{acts[appoints[i][6]]}}" /></td></form>
+        <input type="text" name="aid" value="{{i[0]}}" id="" hidden>
+        <td><input type="submit" name="" id="" value="{{acts[i[6]]}}" /></td></form>
     <form action="/delete_appoint" method="POST">
-        <input type="text" name="aid" value="{{appoints[i][0]}}" id="" hidden>
+        <input type="text" name="aid" value="{{i[0]}}" id="" hidden>
         <td><input type="submit" name="del" value="disapprove" id=""></td>
         </form>
     </tr>

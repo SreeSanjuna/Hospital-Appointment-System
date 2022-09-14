@@ -463,6 +463,7 @@ def doctor_appoint():
         appoints=mycursor.fetchall()
         print(appoints)
         l=[]
+        j=0
         act={'pending':'approve','approve':'visited'}
         for i in appoints:
             sql2='select fullname from patient_details where patientID=%s'
@@ -470,8 +471,9 @@ def doctor_appoint():
             mycursor.execute(sql2,val2)
             pname=mycursor.fetchone()[0]
             l.append(pname)
+            j+=1
         print("heyy 3")
-        return render_template('dis_doctor_appoint.html',appoints=appoints,pname=l,j=0,acts=act)
+        return render_template('dis_doctor_appoint.html',appoints=appoints,pname=l,j=j,acts=act)
     except Exception as e:
         print(e)
         return render_template('dis_doctor_noappoint.html',msg="NO APPOINTMENTS")
@@ -520,4 +522,37 @@ def user_com():
     contact=mycursor.fetchall()
     print(contact)
     return render_template('user_comments.html',dis=contact)
+@app.route('/search_option',methods=['POST'])
+def search_option():
+    sql1='select doctorID from doctor_details where emailid=%s'
+    val1=[session['loggedUser']]
+    mycursor.execute(sql1,val1)
+    print("heyy")
+    did=mycursor.fetchone()[0]
+    if(request.form['opt']=='active'):
+        return redirect(url_for('doctor_appoint'))
+    sql='select * from appointments where astatus=%s and doctorID=%s'
+    val=[request.form['opt'],did]
+    mycursor.execute(sql,val)
+    appoints=mycursor.fetchall()
+    print(appoints)
+    l=[]
+    j=0
+    act={'pending':'approve','approve':'visited'}
+
+    for i in appoints:
+        sql2='select fullname from patient_details where patientID=%s'
+        val2=[i[1]]
+        mycursor.execute(sql2,val2)
+        pname=mycursor.fetchone()[0]
+        l.append(pname)
+        print("heyy 3")
+        j+=1
+    if j==0:
+        m='No ' + request.form['opt']+' appointments'
+        return render_template('dis_doctor_noappoint.html',msg=m)
+    return render_template('dis_doctor_appoint.html',appoints=appoints,pname=l,acts=act,j=j)
+    
+    # return render_template('dis_doctor_noappoint.html',msg="NO APPOINTMENTS")
+    # return render_template('search_option.html')
 app.run()

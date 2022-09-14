@@ -256,6 +256,17 @@ footer a {
                     
                 </div>
             </nav>
+            <form action="/search_option" method="POST">
+                <div><select name="opt" id="" required>
+                    <option disabled >--Select an option--</option>
+            <option value="pending">pending</option>
+            <option value="confirm">confirmed</option>
+            <option value="visited">visited</option>
+            <option value="disapproved">disapproved</option>
+            <option value="default">Default</option>
+            <input type="submit" value="Search" name="" id="">
+        </select></div>
+    </form>
             <p style='color:red;' text-align="center">{{msg}}</p>
             <footer>
                 <p>
