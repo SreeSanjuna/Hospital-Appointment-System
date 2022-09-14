@@ -1,7 +1,8 @@
 <!doctype html>
 <html lang="en">
   <head>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,7 +13,7 @@
     <!-- Icons Lib : Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
-    <title>Doctor Dashboard</title>
+    <title>Display the List of Doctor's</title>
     <style>
         /*
     DEMO STYLE
@@ -22,6 +23,10 @@
 body {
     font-family: 'Poppins', sans-serif;
     background: #fafafa;
+    background-image: url("/static/assets/img/image-from-rawpixel-id-2292399-jpeg.jpg");
+    /* background-position: center; Center the image */
+    background-repeat: repeat; /* Do not repeat the image */
+    background-size: cover;
 }
 
 p {
@@ -75,7 +80,7 @@ a:focus {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #7386D5;
+    background: #283546;
     color: #fff;
     transition: all 0.3s;
 }
@@ -86,13 +91,14 @@ a:focus {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #6d7fcc;
+    background: #232F3E;
 }
 
 #sidebar ul.components {
     padding: 20px 0;
-    border-bottom: 1px solid #47748b;
+    border-bottom: 1px solid #2d3e52;
 }
+
 
 #sidebar ul p {
     color: #fff;
@@ -160,7 +166,7 @@ a.article:hover {
 footer {
     background-color: #222;
     color: #fff;
-    font-size: 10px;
+    font-size: 15px;
     bottom: 0;
     position: fixed;
     left: 0;
@@ -220,18 +226,28 @@ footer a {
 
             <ul class="list-unstyled components">
                 <li>
-                    <a href="/doctor_login">Doctor Dashboard</a>
+                    <a href="/admin_login">Admin Dashboard</a>
                 </li>
                 <li>
                     <li>
-                        <a href="/doctor_profile_view">My Profile</a>
+                        <a href="/specializations">Specialization</a>
                     </li>
                 </li>
                 <li>
-                    <a href="/doctor_appoint">Appointments</a>
+                    <a href="/doctor_details">Doctors</a>
                 </li>
                 <li>
-                    <a href="/view_chart">Specialization vs Patients</a>
+                    <li>
+                        <a href="/patient_display">Patients</a>
+                    </li>
+                </li>
+                <li>
+                    <a href="/appointment_disp">Appointment History</a>
+                </li>
+                <li>
+                    <li>
+                        <a href="/doc_sess_disp">Doctors Session Logs</a>
+                    </li>
                 </li>
                 
             </ul>
@@ -246,95 +262,78 @@ footer a {
                         <ul class="nav navbar-nav ml-auto">
                             <!-- <li class="nav-item">
                                 <a class="nav-link" href="#">Page</a>
-                            </li> -->
-                            <!-- <li class="nav-item">
-                                <a class="nav-link" href="/doctor_profile_view">My Profile</a>
-                            </li> -->
-                            <li class="nav-item">
-                                <a class="nav-link" href="/doctor_profile">Update Profile</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/doctor_logout">Logout</a>
+                                <a class="nav-link" href="#">Page</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Page</a>
+                            </li>-->
+                            <li class="nav-item">
+                                <a class="nav-link" href="/admin_logout">Logout</a>
                             </li>
                         </ul>
                     </div>
                     
                 </div>
             </nav>
-
-            <!-- Welcome Alert -->
-            <div class="alert alert-success">
-                <strong>Welcome!</strong> {{name}} <!-- Dr. Name-->
+            <div id="alert" class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Welcome!</strong> Admin 
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-
-
-
-            <!-- <div class="container">
-                <div class="row">
-                    <div style="text-align: center;" class="col-lg-3 col-md-4 col-sm-6">
-
-                        <div class="card">
-                            <img style="width: 150px;  display: block;
-                            margin-left: auto;
-                            margin-right: auto;
-                            width: 50%" src="./img/icons8-male-user-96.png" alt="img" class="img-fluid">
-                            <div class="card-body">
-                                <h3 class="card-title">My Profile</h3>
-                                <a href="#" class="card-link stretched-link">Update Profile</a>
-    
-                            </div>
-                        </div>
-    
-    
-                    </div> -->
-
-
-
-            <!-- Grid  -->
-            <!-- <div class="container">
-                <div class="row align-items-center ">
-                    <div class="card">
-                        <div class="col text-center">
-                            <span class="fa-stack fa-lg" style="font-size:60px;color:#C0C0C0 ;">
-                                <i class="fa fa-circle-thin fa-stack-2x" style="color:black;"></i>
-                                <i class="fas fa-user fa-stack-1x"></i>
-                            </span>
-                            <p>My Profile</p>
-                        </div>
-                    </div> 
-                    <div class="card">
-                        <div class="col col-md-offset-2 text-center">
-                            <span class="fa-stack fa-lg" style="font-size:60px;color:#C0C0C0 ;">
-                                <i class="fa fa-circle-thin fa-stack-2x" ></i>
-                                <i class="fas fa-list fa-stack-1x"></i>
-                            </span>
-                            <p>My Appointments</p>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-
-            <h3 style="text-align:center">Bar Chart HTML Example:  Using Only The HTML Charts Tag Library</h3>
-
-            <h1>Specialization vs Number of Patients Bar Chart </h1>
-
-            <div class="chart-wrap vertical">
-              <!-- <h2 class="title">Bar Chart HTML Example:  Using Only HTML And CSS</h2> -->
-              
-              <div class="grid">
-                <!-- {% for i in %} -->
-                  <div class="bar" style="--bar-value:20%;" data-name="Other" title="Other 20%"></div>    
-              </div>
+            
+                <div>
+                    <a href="/doctor_details"><input style="background-color: #7386D5; border-color: #222; color: #fff;"  type="submit" value="Add Doctor Details" class="submitbtn"></a>
+                    <h1 style="text-align: center; color:rgb(18, 164, 164) ;">List of Doctors in the organization</h1> <br>
+                    <form action="/disp_by_search" method="post">
+                        <label style="
+                        margin-left: 32%;
+                    ">Search By: 
+                            <input list="searchby" name="searchby" /></label>
+                            <datalist  id="searchby">
+                              <option value="Email ID">
+                              <option value="Doctor ID">
+                              <option value="Specialization">
+                                <option value="None">
+                            </datalist>
+                            <input style="background-color: #7386D5; border-color: #222; color: #fff;"  type="submit" value="Submit" class="submitbtn">
+                    </form>
+                    <br><br><br>
+                    <table class="table table-striped">
+                        <thead>
+                          <tr style="background-color: #066961; color: whitesmoke;">
+                            <th scope="col">Doctor Id</th>
+                            <th scope="col">Full Name</th>
+                            <th scope="col">Qualification</th>
+                            <th scope="col">Email Id</th>
+                            <th scope="col">Contact Number</th>
+                            <th scope="col">Consultancy Fee</th>
+                            <th scope="col">Password</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">City</th>
+                            <th scope="col">State</th>
+                            <th scope="col">Specialization</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in data : %}
+                            <tr>
+                                {% for j in i : %}
+                                <td>{{j}}</td>
+                                {% endfor %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                      </table>          
             </div>
-        
 
         </div>
     </div>
     <footer>
-        <p>
             Created by <i class="fa fa-heart"></i>
             <a target="_blank" href="#">FD2ISV ©Copyright 2022</a>
-        </p>
     </footer>
 
     <script>
@@ -343,6 +342,10 @@ footer a {
                 $('#sidebar').toggleClass('active');
             });
         });
+        setTimeout(function () {
+        // Closing the alert
+        $('#alert').alert('close');
+        }, 5000);
     </script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

@@ -196,6 +196,99 @@ def display_by_specialization():
     x=mycursor.fetchall()
     return render_template('display_by_spcl.html',data=x)
 
+@app.route('/disp_by_search',methods=['POST','GET'])
+def display_by_emailid():
+    if request.form['searchby']=='Email ID':
+        mycursor.execute('select emailid from doctor_details')
+        x1=mycursor.fetchall()
+        mycursor.execute('select * from doctor_details order by doctorID desc ')
+        x=mycursor.fetchall()
+        q=dict()
+        for i in range(0,len(x)):
+            p=[]
+            y=x[i][0]
+            mycursor.execute('select s.sname from d_s_mapping dsm join specialization s on dsm.sid=s.sid where dsm.doctorID=%s',[y])
+            z=mycursor.fetchall()
+            for i in z:
+                p.append(i[0])
+            q[y]=p
+        return render_template('disp_by_emailid_1.html',data1=x1,data=x,combo=q)
+    elif request.form['searchby']=='Doctor ID':
+        mycursor.execute('select doctorid from doctor_details')
+        x1=mycursor.fetchall()
+        mycursor.execute('select * from doctor_details order by doctorID desc ')
+        x=mycursor.fetchall()
+        q=dict()
+        for i in range(0,len(x)):
+            p=[]
+            y=x[i][0]
+            mycursor.execute('select s.sname from d_s_mapping dsm join specialization s on dsm.sid=s.sid where dsm.doctorID=%s',[y])
+            z=mycursor.fetchall()
+            for i in z:
+                p.append(i[0])
+            q[y]=p
+        return render_template('disp_by_doctorid.html',data1=x1,data=x,combo=q)
+    elif request.form['searchby']=='Specialization':
+        mycursor.execute('select sname from specialization')
+        x1=mycursor.fetchall()
+        mycursor.execute('select * from doctor_details order by doctorID desc ')
+        x=mycursor.fetchall()
+        q=dict()
+        for i in range(0,len(x)):
+            p=[]
+            y=x[i][0]
+            mycursor.execute('select s.sname from d_s_mapping dsm join specialization s on dsm.sid=s.sid where dsm.doctorID=%s',[y])
+            z=mycursor.fetchall()
+            for i in z:
+                p.append(i[0])
+            q[y]=p
+        return render_template('disp_by_specialization.html',data1=x1,data=x,combo=q)
+    else:
+        if request.form['searchby']=='None':
+            return display()
+
+@app.route('/disp_by_emailid_2',methods=['POST','GET'])
+def display_by_emailid_1():
+    print('111111')
+    mycursor.execute('select * from doctor_details where emailid=%s',[request.form['emails']])
+    x=mycursor.fetchall()
+    print('222222',x)
+    mycursor.execute('select dsm.doctorID,s.sname from specialization s join d_s_mapping dsm on dsm.sid=s.sid where dsm.doctorid=(select doctorid from doctor_details where emailid=%s)',[x[0][3]])
+    y=mycursor.fetchall()
+    print('333333',y)
+    q=dict()
+    p=[]
+    for i in y:
+        p.append(i[1])
+    print('444444',p)
+    q[y[0][0]]=p
+    print('555555',q)
+    return render_template('display_doctor_details1.html',data=x,combo=q)
+
+@app.route('/disp_by_doctorid',methods=['POST','GET'])
+def display_by_doctorid():
+    print('111111')
+    mycursor.execute('select * from doctor_details where doctorid=%s',[request.form['did']])
+    x=mycursor.fetchall()
+    print('222222',x)
+    mycursor.execute('select dsm.doctorID,s.sname from specialization s join d_s_mapping dsm on dsm.sid=s.sid where dsm.doctorid=(select doctorid from doctor_details where emailid=%s)',[x[0][3]])
+    y=mycursor.fetchall()
+    print('333333',y)
+    q=dict()
+    p=[]
+    for i in y:
+        p.append(i[1])
+    print('444444',p)
+    q[y[0][0]]=p
+    print('555555',q)
+    return render_template('display_doctor_details1.html',data=x,combo=q)
+
+@app.route('/disp_by_specialization', methods=['POST','GET'])
+def display_by_specialization():
+    mycursor.execute('select d.*, s.sname from doctor_details d join d_s_mapping dsm on d.doctorID=dsm.doctorID join specialization s on s.sid=dsm.sid having s.sname=%s',[request.form['sname']])
+    x=mycursor.fetchall()
+    return render_template('display_by_spcl.html',data=x)
+
 @app.route('/disp')
 def disp():
     return display()
@@ -650,6 +743,16 @@ def search_option():
     # return render_template('search_option.html')
 @app.route('/view_chart')
 def view_chart():
-    
-    return render_template('view_chart.html')
+    sql='select d.sid,count(a.patientID) from appointments a,d_s_mapping d where a.doctorID=d.doctorID and a.astatus="visited" and a.a_date=current_date() group by d.sid '
+    mycursor.execute(sql)
+    data=mycursor.fetchall()
+    print(data)
+    l=[]
+    for i in data:
+        sql1='select sname from specialization where sid=%s'
+        val1=[i[0]]
+        mycursor.execute()
+        d=mycursor.fetchone()[0]
+        l.append(i)
+    return render_template('view_chart.html',data=data,)
 app.run()
