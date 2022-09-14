@@ -338,7 +338,10 @@ def topatient():
 
 @app.route('/book_1')
 def book1():
-    return render_template('book_appointment1.html')
+    sql='select sname from specialization'
+    mycursor.execute(sql)
+    spl=mycursor.fetchall()
+    return render_template('book_appointment1.html',specials=spl)
 
 @app.route('/book_2',methods=['POST'])
 def book2():
@@ -361,7 +364,7 @@ def book2():
         mycursor.execute(sql3,i)
         fetchnames=mycursor.fetchone()
         names.append(fetchnames[0])
-    return render_template('book.html',spl=request.form['special'], namelist=names)
+    return render_template('book_1.html',spl=request.form['special'], namelist=names)
 
 @app.route('/book_3',methods=['POST'])
 def book_3():
@@ -386,17 +389,19 @@ def book_3():
 
 @app.route('/booking',methods=['POST'])
 def book3():
-    sql1='select doctorID from doctor_details where fullname=%s'
-    val1=[request.form['doctors']]
-    mycursor.execute(sql1,val1)
-    doctorid=mycursor.fetchone()[0]
+    # sql1='select doctorID from doctor_details where emailid=%s'
+    # val1=[request.form['doctors']]
+    # mycursor.execute(sql1,val1)
+    print("heyy")
+    # doctorid=mycursor.fetchone()[0]
     sql2='select patientID from patient_details where emailid=%s'
     val2=[session['loggedUser']]
     mycursor.execute(sql2,val2)
     patientid=mycursor.fetchone()[0]
     sql3='insert into appointments(patientID,doctorID,a_date,a_time,reason) values(%s,%s,%s,%s,%s)'
-    val3=[patientid,doctorid,request.form['date'],request.form['time'],request.form['reason']]
+    val3=[patientid,session['doctorid'],session['date'],request.form['times'],session['reason']]
     mycursor.execute(sql3,val3)
+    print("heyy 2")
     conn.commit()
     return render_template('patientdashboard.html',msg="Booked successfully")
 
