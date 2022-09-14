@@ -18,6 +18,10 @@
 body {
     font-family: 'Poppins', sans-serif;
     background: #fafafa;
+    background-image: url("/static/assets/img/image-from-rawpixel-id-2292399-jpeg.jpg");
+    /* background-position: center; Center the image */
+    background-repeat: repeat; /* Do not repeat the image */
+    background-size: cover;
 }
 
 p {
@@ -71,7 +75,7 @@ a:focus {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #7386D5;
+    background: #283546;
     color: #fff;
     transition: all 0.3s;
 }
@@ -82,12 +86,12 @@ a:focus {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #6d7fcc;
+    background: #232F3E;
 }
 
 #sidebar ul.components {
     padding: 20px 0;
-    border-bottom: 1px solid #47748b;
+    border-bottom: 1px solid #2d3e52;
 }
 
 #sidebar ul p {
@@ -158,7 +162,7 @@ footer {
     color: #fff;
     font-size: 15px;
     bottom: 0;
-    position: flex;
+    position: fixed;
     left: 0;
     right: 0;
     text-align: center;
@@ -239,14 +243,14 @@ footer a {
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
-                            <!-- <li class="nav-item active">
-                                <a class="nav-link" href="#">Page</a>
-                            </li> -->
                             <li class="nav-item">
-                                <a class="nav-link" href="/change_pass">Change Password</a>
+                                <a class="nav-link" href="/patient_profile_view">My Profile</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/patient_profile">Update Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/change_pass">Change Password</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="patient_logout">Logout</a>
@@ -258,8 +262,8 @@ footer a {
 <p style='color:red;' text-align="center">{{msg}}</p>
             <div class="container">
                 <div class="table-responsive">
-                    <table class="table">
-                        <tr class="table-primary">
+                    <table class="table table-striped">
+                        <tr style="background-color: #066961; color: whitesmoke;">
                             <td>Doctor Name</td>
                             <td>Date</td>
                             <td>Time</td>

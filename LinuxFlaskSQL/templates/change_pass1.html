@@ -8,11 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <!-- Icons Lib : Font Awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-
-
-    <title>Change Password</title>
+    <title>Appointment's History</title>
     <style>
         /*
     DEMO STYLE
@@ -22,10 +18,6 @@
 body {
     font-family: 'Poppins', sans-serif;
     background: #fafafa;
-    background-image: url("/static/assets/img/image-from-rawpixel-id-2292399-jpeg.jpg");
-    /* background-position: center; Center the image */
-    background-repeat: repeat; /* Do not repeat the image */
-    background-size: cover;
 }
 
 p {
@@ -79,7 +71,7 @@ a:focus {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #283546;
+    background: #7386D5;
     color: #fff;
     transition: all 0.3s;
 }
@@ -90,12 +82,12 @@ a:focus {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #232F3E;
+    background: #6d7fcc;
 }
 
 #sidebar ul.components {
     padding: 20px 0;
-    border-bottom: 1px solid #2d3e52;
+    border-bottom: 1px solid #47748b;
 }
 
 #sidebar ul p {
@@ -172,37 +164,6 @@ a.article:hover {
     transition: all 0.3s;
 }
 
-
-footer {
-    background-color: #222;
-    color: #fff;
-    font-size: 15px;
-    bottom: 0;
-    position: fixed;
-    left: 0;
-    right: 0;
-    text-align: center;
-    z-index: 999;
-}
-
-footer p {
-    margin: 9px 0;
-}
-
-footer i {
-    color: red;
-}
-
-footer a {
-    color: #3c97bf;
-    text-decoration: none;
-}
-
-td{
-    color: whitesmoke;
-}
-
-
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
@@ -252,7 +213,7 @@ td{
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
-                            <li class="nav-item">
+                            <li class="nav-item active">
                                 <a class="nav-link" href="/patient_profile_view">My Profile</a>
                             </li>
                             <li class="nav-item">
@@ -268,7 +229,7 @@ td{
                     </div>
                 </div>
             </nav>
-<!-- <p style='color:red;' text-align="center">{{msg}}</p>
+<p style='color:red;' text-align="center">{{msg}}</p>
             
 <form action="/change_pass" method="POST">
     Old password : <input type="text" name="opwd" value="" id="">
@@ -276,58 +237,9 @@ td{
     Confirm Password : <input type="password" name="confirmpwd" id="confirm_password" required/><br/>
 <input type="submit" value="Change" name="" id="">
 
-</form> -->
-<div>
-    <h1 style="text-align: center; font-family: cursive; color: #6d7fcc ; content: center; margin: auto;">Change Password</h1> <br> <br>
-    <h1></h1>
-    <div class="container-sm" style="background-color:#066961; border-radius: 50px; margin-left: 125px; margin-right: 125px; padding: 35px;" >
-     <table style="margin: auto;">
-        <p style='color:red;'  align="center" >{{msg}}</p>
-        <form class="form-group" action="/change_pass" method="POST"> 
-            <tr>
-                <td colspan="2" class="form-inline">
-                Old Password <input type="text" name="opwd" class="opwd" value="" placeholder="Enter Old Password" size="50%" required style="
-                margin-left: 96px;">
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" class="form-inline">
-                New Password <input type="password" name="ptxt" class="newptxt" value="" placeholder="Enter New Password" size="50%" required style="
-                margin-left: 88px;">
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" class="form-inline">
-                Confirm Password <input type="password" name="ptxt" class="newptxt" value="" placeholder="Repeat New Password" size="50%" required style="
-                margin-left: 58px;">
-                </td>
-            </tr>
-            
-                
-                
-
-            </table>
-        </br>
-            <table style="margin: auto;">
-            <tr class="text-center">
-                <td><input style="background-color: #7386D5; border-color: #222; color: #fff;"  type="submit" value="Change" class="submitbtn"></td>
-            </tr>
-            </table>
-        </form>
-    </table>
-    </div>
-
-
-        
-</div>
+</form>
         </div>
     </div>
-
-    <footer>
-        Created by <i class="fa fa-heart"></i>
-        <a target="_blank" href="#">FD2ISV ©Copyright 2022</a>
-    </footer>
-
     <script>
         $(document).ready(function () {
             $('#sidebarCollapse').on('click', function () {

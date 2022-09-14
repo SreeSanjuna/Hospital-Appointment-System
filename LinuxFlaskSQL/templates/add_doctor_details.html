@@ -12,6 +12,15 @@
     <!-- Icons Lib : Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
+     <!-- Including jQuery -->
+     <script src=
+     "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js">
+         </script>
+       
+         <!-- Including Bootstrap JS -->
+         <script src=
+     "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js">
+         </script>
     <title>Add Doctor Details</title>
     <style>
         /*
@@ -22,6 +31,10 @@
 body {
     font-family: 'Poppins', sans-serif;
     background: #fafafa;
+    background-image: url("/static/assets/img/image-from-rawpixel-id-2292399-jpeg.jpg");
+    /* background-position: center; Center the image */
+    background-repeat: repeat; /* Do not repeat the image */
+    background-size: cover;
 }
 
 p {
@@ -62,6 +75,12 @@ a:focus {
     margin: 40px 0;
 }
 
+.scrollable-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+}
+
 /* ---------------------------------------------------
     SIDEBAR STYLE
 ----------------------------------------------------- */
@@ -75,7 +94,7 @@ a:focus {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #7386D5;
+    background: #283546;
     color: #fff;
     transition: all 0.3s;
 }
@@ -86,13 +105,14 @@ a:focus {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #6d7fcc;
+    background: #232F3E;
 }
 
 #sidebar ul.components {
     padding: 20px 0;
-    border-bottom: 1px solid #47748b;
+    border-bottom: 1px solid #2d3e52;
 }
+
 
 #sidebar ul p {
     color: #fff;
@@ -160,9 +180,9 @@ a.article:hover {
 footer {
     background-color: #222;
     color: #fff;
-    font-size: 10px;
+    font-size: 15px;
     bottom: 0;
-    position: flex;
+    position: fixed;
     left: 0;
     right: 0;
     text-align: center;
@@ -180,6 +200,10 @@ footer i {
 footer a {
     color: #3c97bf;
     text-decoration: none;
+}
+
+td {
+    color: whitesmoke;
 }
 
 /* ---------------------------------------------------
@@ -240,7 +264,7 @@ footer a {
                 </li>
                 <li>
                     <li>
-                        <a href="/doc_sess_disp">Doctors Session Logs</a>
+                        <a href="#">Doctors Session Logs</a>
                     </li>
                 </li>
                 
@@ -254,15 +278,9 @@ footer a {
                 <div class="container-fluid">
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
-                            <!-- <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
-                            </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
+                                <a href="/disp" class="nav-link">Doctors</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
-                            </li> -->
                             <li class="nav-item">
                                 <a class="nav-link" href="/admin_logout">Logout</a>
                             </li>
@@ -273,67 +291,87 @@ footer a {
             </nav>
 
             <!-- Welcome Alert -->
-            <div class="alert alert-success">
-                <strong>Welcome</strong> Admin 
-            </div>
+            <div id="alert" class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Welcome!</strong> Admin
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
 
 
 
             
                 <div>
-                    <a href="/disp"><button>Display Doctor Details</button></a>
                     
-                    <h1 style="text-align: center; color:rgb(18, 164, 164) ; content: center; margin: auto;">Enter Doctor Details</h1> <br> <br>
-                    <p style="text-align: center;">{{m}}</p>
-                    <table style="margin: auto;">
-                        <form action="/admin/add_doctor_details" method="POST""> 
-                                <tr><p>
-                                <td colspan="2" "  style="text-align: center;">Full Name : <input type="text" name="fullname" required></td>
-                                </tr></p>
-                                <tr><p>
-                                <td>Qualification : <input type="text" name="qualification" required></td>
-                                        
-                                <td>Email ID : <input type="email" name="email" required></td>
-                                </p></tr>
-                                <tr><p>
-                                <td>Contact Number : <input type="text" maxlength="10" minlength="10" name="contactno" required></td>
-                                <td>Consultancy Fee : <input type="text" name="consultancyfee" maxlength="3" onkeypress="return isNumberKey(event)" required></td>
-                                </p></tr>
-                                <tr><p>
-                                <td>Password : <input type="password" name="pwd" required></td>
-                                <td>Address : <input type="text" name="address" required></td>
-                                </p></tr>
-                                <tr><p>
-                                <td>City : <input type="text" name="city" required></td>
-                                <td>State : <input type="text" name="state" required></td>
-                                </p></tr>
-                            <!-- <tr><td colspan="2" style="text-align: center;"  style="text-align: center;"><button>Add and Save</button></td></tr> -->
-                            <tr><td colspan="2">Specialization</td></tr>
-                            {% for i in data: %}
-                            <tr><td >
-                            <tr><td colspan="2">
-                                <!-- <input type="checkbox" name="myval" value="{{i[0]}}">{{i[1]}} -->
-                                <select class="select" multiple data-mdb-filter="true">
-                                    <option value="{{i[0]}}">{{i[1]}}"></option>
-                                  </select>
+                    <h1 style="text-align: center; font-family: cursive; color: #6d7fcc ; ; content: center; margin: auto;">Enter Doctor Details</h1> <br> <br>
+                    <h1></h1>
+                    <div class="container-sm" style="background-color:#066961; border-radius: 50px; margin-left: 125px; margin-right: 125px; padding: 35px;" >
+                        <table style="margin: auto;">
+                            <form class="form-group" action="/admin/add_doctor_details" method="POST"> 
+                                <tr>
+                                    <td colspan="2" class="form-inline">
+                                    Full Name <input type="text" name="fullname" class="form-control" placeholder="Enter Full Name" size="66%" style = "margin-left: 61px">
+                                    </td>
+                                </tr>
+                                <table style="margin: auto;">
+                                    <tr>
+                                        <td>Qualification </td>
+                                        <td> <input type="text" name="qualification" class="form-control"></td>
+                                        <td>Email ID </td>
+                                        <td><input type="email" name="email" class="form-control"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Contact Number </td>
+                                        <td><input type="text" name="contactno" class="form-control"></td>
+                                        <td>Consultancy Fee </td>
+                                        <td><input type="text" name="consultancyfee" class="form-control"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Password </td>
+                                        <td><input type="password" name="pwd" class="form-control"></td>
+                                        <td>Address </td>
+                                        <td><input type="text" name="address" class="form-control"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>City </td>
+                                        <td><input type="text" class="form-control" name="city"></td>
+                                        <td>State </td>
+                                        <td><input type="text" class="form-control" name="state"></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" class="btn-group dropright">
+                                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Specialization
+                                            </button>
+                                            <div class="dropdown-menu scrollable-menu" aria-labelledby="dropdownMenuButton">
+                                                
+                                                {% for i in data: %}
+                                                    <input type="checkbox" name="myval" value="{{i[0]}}">{{i[1]}}<br>
+                                                {% endfor %}
+                                            </div>
+                                        </td>
 
-                            </tr></td>
-                            {% endfor %}
-                            <tr><td colspan="2" rowspan="2"><input type="submit" value="Submit"></td></tr>
-                        </form>
+                                    </tr>
+                                </table>
+                                <table style="margin: auto;">
+
+                                <tr class="text-center">
+                                    <td><input type="submit" value="Submit"></td>
+                                </tr>
+                                </table>
+                            </form>
                         </table>
-                    
-                            <!-- <h4 style="text-align: center;">{{m}}</h4> -->
+                    </div>
+        
+                            <h4 style="text-align: center;">{{m}}</h4>
                         
             </div>
 
         </div>
     </div>
     <footer>
-        <p>
             Created by <i class="fa fa-heart"></i>
             <a target="_blank" href="#">FD2ISV ©Copyright 2022</a>
-        </p>
     </footer>
 
     <script>
@@ -342,6 +380,11 @@ footer a {
                 $('#sidebar').toggleClass('active');
             });
         });
+        setTimeout(function () {
+  
+            // Closing the alert
+            $('#alert').alert('close');
+        }, 5000);
     </script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
