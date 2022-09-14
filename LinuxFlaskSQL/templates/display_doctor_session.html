@@ -281,34 +281,24 @@ footer a {
 
             
                 <div>
-                    <a href="/doctor_details"><button>Add Doctor Details</button></a>
-                    <h1 style="text-align: center; color:rgb(18, 164, 164) ;">List of Doctors in the organization</h1> <br>
+                    <!-- <a href="/doctor_details"><button>Add Doctor Details</button></a> -->
+                    <h1 style="text-align: center; color:rgb(18, 164, 164) ;">Appointments</h1> <br>
                     <table border='1' style="border:border-collapse" margin="auto">
-                        <th>DoctorID</th>
-                        <th>Full Name</th>
-                        <th>Qualification</th>
-                        <th>Email ID</th>
-                        <th>Contact Number</th>
-                        <th>Consultancy Fee</th>
-                        <th>Password</th>
-                        <th>Address</th>
-                        <th>City</th>
-                        <th>State</th>
-                        <th>Specialization</th>
-
+                        <th>Session ID</th>
+                        <th>Doctor ID</th>
+                        <th>Name of the Doctor</th>
+                        <th>Login Date and Time</th>
+                        <th>Logout Date and Time</th>
+                        
                     {% for i in data : %}
-                    <tr>
-                        {% for j in i: %}
-                        <td>{{j}}</td>
-                        {% endfor %}
-                        <td>
-                            {% for k in combo[i[0]] : %}
-                            <h6>{{k}}</h6>
+
+                        <tr>
+                            {% for j in i : %}
+                                <td>{{j}}</td>
                             {% endfor %}
-                        </td>
-                    </tr>
+                        </tr>
+
                     {% endfor %}
-                    
                     </table>          
             </div>
 

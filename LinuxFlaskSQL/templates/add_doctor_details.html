@@ -240,7 +240,7 @@ footer a {
                 </li>
                 <li>
                     <li>
-                        <a href="#">Doctors Session Logs</a>
+                        <a href="/doc_sess_disp">Doctors Session Logs</a>
                     </li>
                 </li>
                 
@@ -288,38 +288,42 @@ footer a {
                     <table style="margin: auto;">
                         <form action="/admin/add_doctor_details" method="POST""> 
                                 <tr><p>
-                                <td colspan="2" "  style="text-align: center;">Full Name : <input type="text" name="fullname"></td>
+                                <td colspan="2" "  style="text-align: center;">Full Name : <input type="text" name="fullname" required></td>
                                 </tr></p>
                                 <tr><p>
-                                <td>Qualification : <input type="text" name="qualification"></td>
+                                <td>Qualification : <input type="text" name="qualification" required></td>
                                         
-                                <td>Email ID : <input type="email" name="email"></td>
+                                <td>Email ID : <input type="email" name="email" required></td>
                                 </p></tr>
                                 <tr><p>
-                                <td>Contact Number : <input type="text" maxlength="10" minlength="10" name="contactno"></td>
-                                <td>Consultancy Fee : <input type="text" name="consultancyfee"></td>
+                                <td>Contact Number : <input type="text" maxlength="10" minlength="10" name="contactno" required></td>
+                                <td>Consultancy Fee : <input type="text" name="consultancyfee" maxlength="3" onkeypress="return isNumberKey(event)" required></td>
                                 </p></tr>
                                 <tr><p>
-                                <td>Password : <input type="password" name="pwd"></td>
-                                <td>Address : <input type="text" name="address"></td>
+                                <td>Password : <input type="password" name="pwd" required></td>
+                                <td>Address : <input type="text" name="address" required></td>
                                 </p></tr>
                                 <tr><p>
-                                <td>City : <input type="text" name="city"></td>
-                                <td>State : <input type="text" name="state"></td>
+                                <td>City : <input type="text" name="city" required></td>
+                                <td>State : <input type="text" name="state" required></td>
                                 </p></tr>
                             <!-- <tr><td colspan="2" style="text-align: center;"  style="text-align: center;"><button>Add and Save</button></td></tr> -->
                             <tr><td colspan="2">Specialization</td></tr>
                             {% for i in data: %}
                             <tr><td >
                             <tr><td colspan="2">
-                                <input type="checkbox" name="myval" value="{{i[0]}}">{{i[1]}}
+                                <!-- <input type="checkbox" name="myval" value="{{i[0]}}">{{i[1]}} -->
+                                <select class="select" multiple data-mdb-filter="true">
+                                    <option value="{{i[0]}}">{{i[1]}}"></option>
+                                  </select>
+
                             </tr></td>
                             {% endfor %}
                             <tr><td colspan="2" rowspan="2"><input type="submit" value="Submit"></td></tr>
                         </form>
                         </table>
                     
-                            <h4 style="text-align: center;">{{m}}</h4>
+                            <!-- <h4 style="text-align: center;">{{m}}</h4> -->
                         
             </div>
 

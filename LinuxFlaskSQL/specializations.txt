@@ -21,28 +21,3 @@ Psychiatrist
 Pulmonologist
 Rheumatologist
 Urologist
-
-
-Allergy/Immunology
-Anesthesiology
-Cardiology
-Dermatology
-Endocrinology
-Emergency Physician
-Gastroenterology
-Gynaecology/Obstetrics
-General Surgeon
-Hematology
-Nephrology
-Neurology
-Oncology
-Ophthalmology
-Orthopedic
-Otolaryngology (ENT)
-Pediatrics
-Physiatry
-Podiatrics
-Psychiatry
-Pulmonology
-Rheumatology
-Urology

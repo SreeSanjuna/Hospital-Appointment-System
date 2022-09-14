@@ -12,7 +12,7 @@
     <!-- Icons Lib : Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
-    <title>Display the List of Doctor's</title>
+    <title>Doctor Dashboard</title>
     <style>
         /*
     DEMO STYLE
@@ -162,7 +162,7 @@ footer {
     color: #fff;
     font-size: 10px;
     bottom: 0;
-    position: flex;
+    position: fixed;
     left: 0;
     right: 0;
     text-align: center;
@@ -220,28 +220,15 @@ footer a {
 
             <ul class="list-unstyled components">
                 <li>
-                    <a href="/admin_login">Admin Dashboard</a>
+                    <a href="/doctor_login">Doctor Dashboard</a>
                 </li>
                 <li>
                     <li>
-                        <a href="/specializations">Specialization</a>
+                        <a href="/doctor_profile">My Profile</a>
                     </li>
                 </li>
                 <li>
-                    <a href="/doctor_details">Doctors</a>
-                </li>
-                <li>
-                    <li>
-                        <a href="/patient_display">Patients</a>
-                    </li>
-                </li>
-                <li>
-                    <a href="/appointment_disp">Appointment History</a>
-                </li>
-                <li>
-                    <li>
-                        <a href="/doc_sess_disp">Doctors Session Logs</a>
-                    </li>
+                    <a href="#">Your Schedule</a>
                 </li>
                 
             </ul>
@@ -256,15 +243,15 @@ footer a {
                         <ul class="nav navbar-nav ml-auto">
                             <!-- <li class="nav-item">
                                 <a class="nav-link" href="#">Page</a>
+                            </li> -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="/doctor_profile_view">My Profile</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
+                                <a class="nav-link" href="/doctor_profile">Update Profile</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
-                            </li>
-                            <li class="nav-item"> -->
-                                <a class="nav-link" href="/admin_logout">Logout</a>
+                                <a class="nav-link" href="/doctor_logout">Logout</a>
                             </li>
                         </ul>
                     </div>
@@ -274,43 +261,24 @@ footer a {
 
             <!-- Welcome Alert -->
             <div class="alert alert-success">
-                <strong>Welcome!</strong> Admin 
+                <strong>Welcome!</strong> {{name}} <!-- Dr. Name-->
             </div>
 
+            <p style='color:red;' text-align="center">{{msg}}</p>
 
-
+            <form action="/update_doc_profile" method="POST">
+                Name : <input type="text" name="fullname" value="{{pdata[1]}}" id="" required readonly style="color: #7386D5;"><br>
+                Qualification : <input type="text" name="qualification" value="{{pdata[2]}}" id="" readonly style="color: #7386D5;"><br>
+                Emailid : <input type="text" name="emailid" value="{{pdata[3]}}" id="" readonly readonly style="color: #7386D5;"><br>
+                Contact No. : <input type="text" name="contactno" value="{{pdata[4]}}" id="" required readonly style="color: #7386D5;"><br>
+                Consultancy Fee : <input type="text" name="consultancyfee" value="{{pdata[5]}}" id="" required readonly style="color: #7386D5;"><br>
+                Address : <input type="text" name="address" value="{{pdata[7]}}" id="" required readonly style="color: #7386D5;"><br>
+                City : <input type="text" name="state" value="{{pdata[8]}}" id="" required readonly style="color: #7386D5;"><br>
+                State : <input type="text" name="city" value="{{pdata[9]}}" id="" required readonly style="color: #7386D5;"><br>
+            <!-- <input type="submit" name="" value="Update" id=""> -->
             
-                <div>
-                    <a href="/doctor_details"><button>Add Doctor Details</button></a>
-                    <h1 style="text-align: center; color:rgb(18, 164, 164) ;">List of Doctors in the organization</h1> <br>
-                    <table border='1' style="border:border-collapse" margin="auto">
-                        <th>DoctorID</th>
-                        <th>Full Name</th>
-                        <th>Qualification</th>
-                        <th>Email ID</th>
-                        <th>Contact Number</th>
-                        <th>Consultancy Fee</th>
-                        <th>Password</th>
-                        <th>Address</th>
-                        <th>City</th>
-                        <th>State</th>
-                        <th>Specialization</th>
-
-                    {% for i in data : %}
-                    <tr>
-                        {% for j in i: %}
-                        <td>{{j}}</td>
-                        {% endfor %}
-                        <td>
-                            {% for k in combo[i[0]] : %}
-                            <h6>{{k}}</h6>
-                            {% endfor %}
-                        </td>
-                    </tr>
-                    {% endfor %}
-                    
-                    </table>          
-            </div>
+            
+            </form>
 
         </div>
     </div>

@@ -10,7 +10,7 @@ conn = mysql.connector.connect(user='root',
                                host='127.0.0.1',
                                database='doctorappoint',
                                password='Sreesanjuna@2000')
-# Sreesanjuna@2000
+
 mycursor=conn.cursor()
 
 @app.route('/')
@@ -22,7 +22,6 @@ def home():
     if not session.get('logged_in'):
         return render_template('adminlogin.html')
     else:
-        # return "Hello Admin!  <br> <a href=\"/admin_logout\">Logout</a>"
         return render_template('admindashboard.html')
 
 @app.route('/adminlogin', methods=['POST'])
@@ -51,14 +50,11 @@ def specializations():
 def add_specializations():
     mycursor.execute('select sname from specialization')
     x=mycursor.fetchall()
-    print(x)
     l=[]
     for i in x:
         for j in i:
             l.append(j)
-    print(l)
     if request.form['sname'] not in l:
-        print('!!!!!!', request.form['sname'])
         mycursor.execute('insert into specialization (sname) values (%s)',[request.form['sname']])
         conn.commit()
         mycursor.execute('select * from specialization order by sid asc')
@@ -66,7 +62,6 @@ def add_specializations():
         m=''
         return render_template('add_specialization.html',data=x,msg=m)
     else:
-        print('@@@@@@')
         mycursor.execute('select * from specialization order by sid asc')
         x=mycursor.fetchall()
         m='Specialization already exists'
@@ -114,9 +109,18 @@ def disp():
 
 @app.route("/display",methods=['POST'])
 def display():
-    mycursor.execute('select doctorID,fullname,qualification,emailid,contactno,consultancyfee,address,city,state from doctor_details order by doctorID desc ')
+    mycursor.execute('select * from doctor_details order by doctorID desc ')
     x=mycursor.fetchall()
-    return render_template('display_doctor_details.html',data=x)
+    q=dict()
+    for i in range(0,len(x)):
+        p=[]
+        y=x[i][0]
+        mycursor.execute('select s.sname from d_s_mapping dsm join specialization s on dsm.sid=s.sid where dsm.doctorID=%s',[y])
+        z=mycursor.fetchall()
+        for i in z:
+            p.append(i[0])
+        q[y]=p
+    return render_template('display_doctor_details.html',data=x,combo=q)
 
 @app.route('/patient_display')
 def patientdisp_disp():
@@ -140,11 +144,20 @@ def app_display():
     x=mycursor.fetchall()
     return render_template('display_appointments.html',data=x)
 
+@app.route('/doc_sess_disp')
+def doc_sess_disp():
+    return doctor_session_display()
+
+@app.route("/doctor_session_display",methods=['POST'])
+def doctor_session_display():
+    mycursor.execute('select ds.sessionID,ds.doctorID,dd.fullname,ds.login_time,ds.logout_time from doctor_session ds join doctor_details dd on ds.doctorID=dd.doctorID order by sessionID desc')
+    x=mycursor.fetchall()
+    return render_template('display_doctor_session.html',data=x)
+
 @app.route('/doctor_login')
 def doctor():
     if not session.get('logged_in'):
         session['logged_in']=True
-        
         m=''
         return render_template('doclogin.html',msg=m)
     else:
@@ -152,8 +165,17 @@ def doctor():
 
 @app.route('/doctorlogin',methods=['POST','GET'])
 def doc_login():
+    mycursor.execute('select doctorID from doctor_details where emailid=%s',[request.form['email']])
+    b=mycursor.fetchall()[0][0]
+    mycursor.execute('select current_timestamp()')
+    c=mycursor.fetchall()[0][0]
+    mycursor.execute('insert into doctor_session (doctorID,login_time) values (%s ,%s)',[b,c])
+    conn.commit()
+    mycursor.execute('select sessionID from doctor_session where doctorID=%s and login_time=%s',[b,c])
+    session['sessionID']=mycursor.fetchall()[0][0]
     mycursor.execute('select emailid from doctor_details')
     x=mycursor.fetchall()
+    session['loggedUser']=request.form['email']
     l=[]
     for i in x:
         for j in i:
@@ -174,6 +196,39 @@ def doc_login():
     else:
         m='You have entered wrong Email ID!'
         return render_template('doclogin.html',msg=m)
+
+@app.route('/doctor_profile_view')
+def doctor_profile_view():
+    sql='select * from doctor_details where emailid=%s'
+    val=[session['loggedUser']]
+    mycursor.execute(sql,val)
+    data=mycursor.fetchone()
+    print(data)
+    return render_template('doctor_profile_view.html',pdata=data)
+
+@app.route('/doctor_profile')
+def doctor_profile():
+    sql='select * from doctor_details where emailid=%s'
+    val=[session['loggedUser']]
+    mycursor.execute(sql,val)
+    data=mycursor.fetchone()
+    print(data)
+    return render_template('doctor_profile.html',pdata=data)
+    
+@app.route('/update_doc_profile',methods=['POST'])
+def update_doc_profile():
+    try:
+        sql='update doctor_details set fullname=%s,qualification=%s,emailid=%s,contactno=%s,consultancyfee=%s,address=%s,city=%s,state=%s where emailid=%s'
+        print("heyyy")
+        val=[request.form['fullname'],request.form['qualification'],request.form['email'],request.form['contactno'],request.form['consultancyfee'],request.form['address'],request.form['city'],request.form['state'],session['loggedUser']]
+        print("heyyy2")
+        mycursor.execute(sql,val)
+        conn.commit()
+        print("heyy3")
+        return render_template('doctordashboard.html',msg="Updated successfully")
+    except Exception as e:
+        print(e)
+        return render_template('doctordashboard.html',msg="error")
 
 @app.route('/patient_signup')
 def patient():
@@ -200,7 +255,6 @@ def signup():
             msg="\""+request.form['emailid']+"\""+" already exists!"
             return render_template('patientlogin.html',m=msg)
     else:
-        print('Entered!!')
         sql='insert into patient_details (fullname,emailid,gender,dob,pwd,contactno,address,state,city) values (%s,%s,%s,%s,%s,%s,%s,%s,%s)'
         val=[request.form['fullname'],request.form['emailid'],request.form['gender'],request.form['dob'],request.form['pwd'],request.form['contactno'],request.form['address'],request.form['state'],request.form['city']]
         mycursor.execute(sql,val)
@@ -224,6 +278,16 @@ def login():
             return render_template("patientdashboard.html")
         else:
             return render_template("patientlogin.html",msg="Incorrect credentials")
+
+@app.route('/patient_profile_view')
+def patient_profile_view():
+    sql='select * from patient_details where emailid=%s'
+    val=[session['loggedUser']]
+    mycursor.execute(sql,val)
+    data=mycursor.fetchone()
+    print(data)
+    return render_template('patient_profile_view.html',pdata=data)
+
 @app.route('/patient_profile')
 def patient_profile():
     sql='select * from patient_details where emailid=%s'
@@ -232,6 +296,7 @@ def patient_profile():
     data=mycursor.fetchone()
     print(data)
     return render_template('patient_profile.html',pdata=data)
+    
 @app.route('/update_profile',methods=['POST'])
 def update_profile():
     try:
@@ -273,11 +338,7 @@ def topatient():
 
 @app.route('/book_1')
 def book1():
-    sql='select sname from specialization'
-    mycursor.execute(sql)
-    spl=mycursor.fetchall()
-    print(spl)
-    return render_template('book_appointment1.html',specials=spl)
+    return render_template('book_appointment.html')
 
 @app.route('/book_2',methods=['POST'])
 def book2():
@@ -300,7 +361,7 @@ def book2():
         mycursor.execute(sql3,i)
         fetchnames=mycursor.fetchone()
         names.append(fetchnames[0])
-    return render_template('book_1.html',spl=request.form['special'], namelist=names)
+    return render_template('book.html',spl=request.form['special'], namelist=names)
 
 @app.route('/book_3',methods=['POST'])
 def book_3():
@@ -322,18 +383,20 @@ def book_3():
             l.remove(i[0])
     print(l)
     return render_template('book_3.html',time=l)
+
 @app.route('/booking',methods=['POST'])
 def book3():
-    
+    sql1='select doctorID from doctor_details where fullname=%s'
+    val1=[request.form['doctors']]
+    mycursor.execute(sql1,val1)
+    doctorid=mycursor.fetchone()[0]
     sql2='select patientID from patient_details where emailid=%s'
     val2=[session['loggedUser']]
     mycursor.execute(sql2,val2)
-    print("heyyy 1")
     patientid=mycursor.fetchone()[0]
     sql3='insert into appointments(patientID,doctorID,a_date,a_time,reason) values(%s,%s,%s,%s,%s)'
-    val3=[patientid,session['doctorid'],session['date'],request.form['times'],session['reason']]
+    val3=[patientid,doctorid,request.form['date'],request.form['time'],request.form['reason']]
     mycursor.execute(sql3,val3)
-    print("heyy 2")
     conn.commit()
     return render_template('patientdashboard.html',msg="Booked successfully")
 
@@ -360,7 +423,7 @@ def history():
         doctorname=mycursor.fetchone()[0]
         listapp[j][2]=doctorname
         j+=1
-    return render_template("book_history1.html",listapps=listapp)
+    return render_template("book_history.html",listapps=listapp)
 
 @app.route("/admin_logout")
 def logout():
@@ -370,6 +433,9 @@ def logout():
 @app.route("/doctor_logout")
 def doc_logout():
     session['logged_in'] = False
+    print(session['sessionID'])
+    mycursor.execute('update doctor_session set logout_time=current_timestamp() where sessionID=%s',[session['sessionID']] )
+    conn.commit()
     return enter()
 
 @app.route("/patient_logout")

@@ -213,14 +213,14 @@ a.article:hover {
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
-                            <!-- <li class="nav-item active">
-                                <a class="nav-link" href="#">Page</a>
-                            </li> -->
-                            <li class="nav-item">
-                                <a class="nav-link" href="/change_pass">Change Password</a>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/patient_profile_view">My Profile</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/patient_profile">Update Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/change_pass">Change Password</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="patient_logout">Logout</a>
@@ -232,14 +232,14 @@ a.article:hover {
 <p style='color:red;' text-align="center">{{msg}}</p>
             
 <form action="/update_profile" method="POST">
-    Name : <input type="text" name="name" value="{{pdata[1]}}" id="" required><br>
-    Emailid : <input type="text" name="emailid" value="{{pdata[2]}}" id="" readonly><br>
-    Gender : <input type="text" name="gender" value="{{pdata[3]}}" id="" required><br>
-    Date of Birth : <input type="text" name="dob" value="{{pdata[4]}}" id="" required><br>
-    ContactNo : <input type="text" name="contactno" value="{{pdata[6]}}" id="" required><br>
-    Address : <input type="text" name="address" value="{{pdata[7]}}" id="" required><br>
-    State : <input type="text" name="state" value="{{pdata[8]}}" id="" required><br>
-    City : <input type="text" name="city" value="{{pdata[9]}}" id="" required><br>
+    Name : <input type="text" name="name" value="{{pdata[1]}}" id="" required  style="color: #7386D5;"><br>
+    Emailid : <input type="text" name="emailid" value="{{pdata[2]}}" id="" readonly style="color: #a3a9be;"><br>
+    Gender : <input type="text" name="gender" value="{{pdata[3]}}" id="" required  style="color: #7386D5;"><br>
+    Date of Birth : <input type="text" name="dob" value="{{pdata[4]}}" id="" required style="color: #7386D5;"><br>
+    ContactNo : <input type="text" name="contactno" value="{{pdata[6]}}" id="" required style="color: #7386D5;"><br>
+    Address : <input type="text" name="address" value="{{pdata[7]}}" id="" required style="color: #7386D5;"><br>
+    State : <input type="text" name="state" value="{{pdata[8]}}" id="" required style="color: #7386D5;"><br>
+    City : <input type="text" name="city" value="{{pdata[9]}}" id="" required style="color: #7386D5;"><br>
 <input type="submit" name="" value="Update" id="">
 
 
