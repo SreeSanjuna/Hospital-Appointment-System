@@ -456,14 +456,14 @@ def doctor_appoint():
         mycursor.execute(sql1,val1)
         print("heyy")
         did=mycursor.fetchone()[0]
-        sql='select * from appointments where doctorID=%s'
+        sql='select * from appointments where doctorID=%s and astatus not in ("disapprove","visited")'
         val=[did]
         mycursor.execute(sql,val)
         print("heyyy 2")
         appoints=mycursor.fetchall()
         print(appoints)
         l=[]
-        act={'pending':'confirm','confirm':'visited'}
+        act={'pending':'approve','approve':'visited'}
         for i in appoints:
             sql2='select fullname from patient_details where patientID=%s'
             val2=[i[1]]
@@ -478,10 +478,31 @@ def doctor_appoint():
 @app.route('/change_status',methods=['POST'])
 def change_status():
     print(request.form['aid'])
-    return render_template('dis_doctor_appoint.html')
+    sql='select astatus from appointments where aid=%s'
+    val=[request.form['aid']]
+    mycursor.execute(sql,val)
+    status=mycursor.fetchone()[0]
+    if status=='pending':
+        sql1='update appointments set astatus="approve" where aid=%s'
+        val1=[request.form['aid']]
+        mycursor.execute(sql1,val1)
+        conn.commit()
+    elif status=='approve':
+        sql1='update appointments set astatus="visited" where aid=%s'
+        val1=[request.form['aid']]
+        mycursor.execute(sql1,val1)
+        conn.commit()
+    else:
+        pass
+    return redirect(url_for('doctor_appoint'))
+
 @app.route('/delete_appoint',methods=['POST'])
 def del_appoint():
     print(request.form['aid'])
-    return render_template('dis_doctor_appoint.html')
+    sql1='update appointments set astatus="disapproved" where aid=%s'
+    val1=[request.form['aid']]
+    mycursor.execute(sql1,val1)
+    conn.commit()
+    return redirect(url_for('doctor_appoint'))
 
 app.run()

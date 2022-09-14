@@ -269,10 +269,10 @@ footer a {
             <td>delete</td>
         </th>
         
-        <tr>
+        
             {% for i in appoints: %}
-            {{ j }}+{{1}}
-            <td>{{j}}</td>
+            <tr>
+            <td>{{j+1}}</td>
             <td>{{pname[j]}}</td>   
             <td>{{i[3]}}</td>   
             <td>{{i[4]}}</td>   
@@ -280,13 +280,14 @@ footer a {
             <td>{{i[6]}}</td>
             <form action="/change_status" method="POST">
         <input type="text" name="aid" value="{{i[0]}}" id="" hidden>
-            <input type="submit" name="" id="" value="{{acts[i[6]]}}" /></td></form>
+        <td><input type="submit" name="" id="" value="{{acts[i[6]]}}" /></td></form>
     <form action="/delete_appoint" method="POST">
         <input type="text" name="aid" value="{{i[0]}}" id="" hidden>
-        <td><input type="submit" name="del" value="delete" id=""></td>
+        <td><input type="submit" name="del" value="disapprove" id=""></td>
         </form>
+    </tr>
             {% endfor %}
-        </tr>
+        
     </table>
     <footer>
         <p>
