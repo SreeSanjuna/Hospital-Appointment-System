@@ -10,7 +10,7 @@ conn = mysql.connector.connect(user='root',
                                host='127.0.0.1',
                                database='doctorappoint',
                                password='Sreesanjuna@2000')
-
+# Sreesanjuna@2000
 mycursor=conn.cursor()
 
 @app.route('/')
@@ -224,6 +224,33 @@ def login():
             return render_template("patientdashboard.html")
         else:
             return render_template("patientlogin.html",msg="Incorrect credentials")
+@app.route('/patient_profile')
+def patient_profile():
+    sql='select * from patient_details where emailid=%s'
+    val=[session['loggedUser']]
+    mycursor.execute(sql,val)
+    data=mycursor.fetchone()
+    print(data)
+    return render_template('patient_profile.html',pdata=data)
+@app.route('/update_profile',methods=['POST'])
+def update_profile():
+    try:
+        sql='update patient_details set fullname=%s,gender=%s,dob=%s,contactno=%s,address=%s,state=%s,city=%s where emailid=%s'
+        print("heyyy")
+        val=[request.form['name'],request.form['gender'],request.form['dob'],request.form['contactno'],request.form['address'],request.form['state'],request.form['city'],session['loggedUser']]
+        print("heyyy2")
+        mycursor.execute(sql,val)
+        conn.commit()
+        print("heyy3")
+        return render_template('patientdashboard.html',msg="Updated successfully")
+    except Exception as e:
+        print(e)
+        return render_template('patientdashboard.html',msg="error")
+
+@app.route('/change_pass')
+def change_pass():
+    return render_template('change_pass.html')
+
 
 @app.route('/redirect')
 def topatient():
