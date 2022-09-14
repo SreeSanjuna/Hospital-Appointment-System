@@ -456,7 +456,7 @@ def doctor_appoint():
         mycursor.execute(sql1,val1)
         print("heyy")
         did=mycursor.fetchone()[0]
-        sql='select * from appointments where doctorID=%s and astatus not in ("disapprove","visited")'
+        sql='select * from appointments where doctorID=%s and astatus not in ("disapproved","visited")'
         val=[did]
         mycursor.execute(sql,val)
         print("heyyy 2")
