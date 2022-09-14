@@ -512,4 +512,12 @@ def contact_us():
     mycursor.execute(sql,val)
     conn.commit()
     return render_template('welcome.html')
+
+@app.route('/user_com')
+def user_com():
+    sql='select * from contactus'
+    mycursor.execute(sql)
+    contact=mycursor.fetchall()
+    print(contact)
+    return render_template('user_comments.html',dis=contact)
 app.run()
