@@ -10,7 +10,7 @@ conn = mysql.connector.connect(user='root',
                                host='127.0.0.1',
                                database='doctorappoint',
                                password='Sreesanjuna@2000')
-
+# Sreesanjuna@2000
 mycursor=conn.cursor()
 
 @app.route('/')
@@ -338,7 +338,7 @@ def topatient():
 
 @app.route('/book_1')
 def book1():
-    return render_template('book_appointment.html')
+    return render_template('book_appointment1.html')
 
 @app.route('/book_2',methods=['POST'])
 def book2():
@@ -424,7 +424,10 @@ def history():
         listapp[j][2]=doctorname
         j+=1
     return render_template("book_history.html",listapps=listapp)
-
+@app.route("/doctor_appoint")
+def doctor_appoint():
+    sql='select * from appointments where '
+    return render_template('dis_doctor_appoint')
 @app.route("/admin_logout")
 def logout():
     session['logged_in'] = False
