@@ -9,7 +9,7 @@ app.secret_key="abc"
 conn = mysql.connector.connect(user='root',
                                host='127.0.0.1',
                                database='doctorappoint',
-                               password='Sreesanjuna@2000')
+                               password='')
 # Sreesanjuna@2000
 mycursor=conn.cursor()
 
@@ -429,10 +429,7 @@ def history():
         listapp[j][2]=doctorname
         j+=1
     return render_template("book_history.html",listapps=listapp)
-@app.route("/doctor_appoint")
-def doctor_appoint():
-    sql='select * from appointments where '
-    return render_template('dis_doctor_appoint')
+
 @app.route("/admin_logout")
 def logout():
     session['logged_in'] = False
@@ -450,5 +447,41 @@ def doc_logout():
 def patient_logout():
     session['logged_in'] = False
     return enter()
+
+@app.route("/doctor_appoint")
+def doctor_appoint():
+    try:
+        sql1='select doctorID from doctor_details where emailid=%s'
+        val1=[session['loggedUser']]
+        mycursor.execute(sql1,val1)
+        print("heyy")
+        did=mycursor.fetchone()[0]
+        sql='select * from appointments where doctorID=%s'
+        val=[did]
+        mycursor.execute(sql,val)
+        print("heyyy 2")
+        appoints=mycursor.fetchall()
+        print(appoints)
+        l=[]
+        act={'pending':'confirm','confirm':'visited'}
+        for i in appoints:
+            sql2='select fullname from patient_details where patientID=%s'
+            val2=[i[1]]
+            mycursor.execute(sql2,val2)
+            pname=mycursor.fetchone()[0]
+            l.append(pname)
+        print("heyy 3")
+        return render_template('dis_doctor_appoint.html',appoints=appoints,pname=l,j=0,acts=act)
+    except Exception as e:
+        print(e)
+        return render_template('dis_doctor_noappoint.html',msg="NO APPOINTMENTS")
+@app.route('/change_status',methods=['POST'])
+def change_status():
+    print(request.form['aid'])
+    return render_template('dis_doctor_appoint.html')
+@app.route('/delete_appoint',methods=['POST'])
+def del_appoint():
+    print(request.form['aid'])
+    return render_template('dis_doctor_appoint.html')
 
 app.run()
