@@ -12,7 +12,7 @@
     <!-- Icons Lib : Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
-    <title>Add Doctor Details</title>
+    <title>Doctor Dashboard</title>
     <style>
         /*
     DEMO STYLE
@@ -162,7 +162,7 @@ footer {
     color: #fff;
     font-size: 10px;
     bottom: 0;
-    position: flex;
+    position: fixed;
     left: 0;
     right: 0;
     text-align: center;
@@ -220,28 +220,18 @@ footer a {
 
             <ul class="list-unstyled components">
                 <li>
-                    <a href="/admin_login">Admin Dashboard</a>
+                    <a href="/doctor_login">Doctor Dashboard</a>
                 </li>
                 <li>
                     <li>
-                        <a href="/specializations">Specialization</a>
+                        <a href="/doctor_profile_view">My Profile</a>
                     </li>
                 </li>
                 <li>
-                    <a href="/doctor_details">Doctors</a>
+                    <a href="/doctor_appoint">Appointments</a>
                 </li>
                 <li>
-                    <li>
-                        <a href="/patient_display">Patients</a>
-                    </li>
-                </li>
-                <li>
-                    <a href="/appointment_disp">Appointment History</a>
-                </li>
-                <li>
-                    <li>
-                        <a href="/doc_sess_disp">Doctors Session Logs</a>
-                    </li>
+                    <a href="/view_chart">Specialization vs Patients</a>
                 </li>
                 
             </ul>
@@ -256,15 +246,15 @@ footer a {
                         <ul class="nav navbar-nav ml-auto">
                             <!-- <li class="nav-item">
                                 <a class="nav-link" href="#">Page</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
+                            </li> -->
+                            <!-- <li class="nav-item">
+                                <a class="nav-link" href="/doctor_profile_view">My Profile</a>
                             </li> -->
                             <li class="nav-item">
-                                <a class="nav-link" href="/admin_logout">Logout</a>
+                                <a class="nav-link" href="/doctor_profile">Update Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/doctor_logout">Logout</a>
                             </li>
                         </ul>
                     </div>
@@ -274,58 +264,92 @@ footer a {
 
             <!-- Welcome Alert -->
             <div class="alert alert-success">
-                <strong>Welcome</strong> Admin 
+                <strong>Welcome!</strong> {{name}} <!-- Dr. Name-->
             </div>
 
 
 
-            
-                <div>
-                    <a href="/disp"><button>Display Doctor Details</button></a>
-                    
-                    <h1 style="text-align: center; color:rgb(18, 164, 164) ; content: center; margin: auto;">Enter Doctor Details</h1> <br> <br>
-                    <p style="text-align: center;">{{m}}</p>
-                    <table style="margin: auto;">
-                        <form action="/admin/add_doctor_details" method="POST""> 
-                                <tr><p>
-                                <td colspan="2" "  style="text-align: center;">Full Name : <input type="text" name="fullname" required></td>
-                                </tr></p>
-                                <tr><p>
-                                <td>Qualification : <input type="text" name="qualification" required></td>
-                                        
-                                <td>Email ID : <input type="email" name="email" required></td>
-                                </p></tr>
-                                <tr><p>
-                                <td>Contact Number : <input type="text" maxlength="10" minlength="10" name="contactno" required></td>
-                                <td>Consultancy Fee : <input type="text" name="consultancyfee" maxlength="3" onkeypress="return isNumberKey(event)" required></td>
-                                </p></tr>
-                                <tr><p>
-                                <td>Password : <input type="password" name="pwd" required></td>
-                                <td>Address : <input type="text" name="address" required></td>
-                                </p></tr>
-                                <tr><p>
-                                <td>City : <input type="text" name="city" required></td>
-                                <td>State : <input type="text" name="state" required></td>
-                                </p></tr>
-                            <!-- <tr><td colspan="2" style="text-align: center;"  style="text-align: center;"><button>Add and Save</button></td></tr> -->
-                            <tr><td colspan="2">Specialization</td></tr>
-                            {% for i in data: %}
-                            <tr><td >
-                            <tr><td colspan="2">
-                                <!-- <input type="checkbox" name="myval" value="{{i[0]}}">{{i[1]}} -->
-                                <select class="select" multiple data-mdb-filter="true">
-                                    <option value="{{i[0]}}">{{i[1]}}"></option>
-                                  </select>
+            <!-- <div class="container">
+                <div class="row">
+                    <div style="text-align: center;" class="col-lg-3 col-md-4 col-sm-6">
 
-                            </tr></td>
-                            {% endfor %}
-                            <tr><td colspan="2" rowspan="2"><input type="submit" value="Submit"></td></tr>
-                        </form>
-                        </table>
-                    
-                            <!-- <h4 style="text-align: center;">{{m}}</h4> -->
-                        
-            </div>
+                        <div class="card">
+                            <img style="width: 150px;  display: block;
+                            margin-left: auto;
+                            margin-right: auto;
+                            width: 50%" src="./img/icons8-male-user-96.png" alt="img" class="img-fluid">
+                            <div class="card-body">
+                                <h3 class="card-title">My Profile</h3>
+                                <a href="#" class="card-link stretched-link">Update Profile</a>
+    
+                            </div>
+                        </div>
+    
+    
+                    </div> -->
+
+
+
+            <!-- Grid  -->
+            <!-- <div class="container">
+                <div class="row align-items-center ">
+                    <div class="card">
+                        <div class="col text-center">
+                            <span class="fa-stack fa-lg" style="font-size:60px;color:#C0C0C0 ;">
+                                <i class="fa fa-circle-thin fa-stack-2x" style="color:black;"></i>
+                                <i class="fas fa-user fa-stack-1x"></i>
+                            </span>
+                            <p>My Profile</p>
+                        </div>
+                    </div> 
+                    <div class="card">
+                        <div class="col col-md-offset-2 text-center">
+                            <span class="fa-stack fa-lg" style="font-size:60px;color:#C0C0C0 ;">
+                                <i class="fa fa-circle-thin fa-stack-2x" ></i>
+                                <i class="fas fa-list fa-stack-1x"></i>
+                            </span>
+                            <p>My Appointments</p>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+            <h3 style="text-align:center">Bar Chart HTML Example:  Using Only The HTML Charts Tag Library</h3>
+
+<infographic-bargraph style="padding:0 5%;width:100%" 
+  width="90%" height="300" type="vertical" 
+  font-size="20px" font-color="#000000" font-family="Open Sans"
+  colors="#F16335"
+  serie-spacing="35" padding="25" max-value="200"
+  grid-scale="20" grid-font-size="14px" grid-color="#aaa">
+  <infographic-data>
+	<infographic-bargroup name="Your Blog">
+		<infographic-bar value="85">Number of posts</infographic-bar>
+	</infographic-bargroup>
+	<infographic-bargroup name="Medium">
+		<infographic-bar value="23">Number of posts</infographic-bar>
+	</infographic-bargroup>
+	<infographic-bargroup name="Tumblr">
+		<infographic-bar value="7">Number of posts</infographic-bar>
+	</infographic-bargroup>
+	<infographic-bargroup name="Facebook">
+		<infographic-bar value="38">Number of posts</infographic-bar>
+	</infographic-bargroup>
+	<infographic-bargroup name="YouTube">
+		<infographic-bar value="35">Number of posts</infographic-bar>
+	</infographic-bargroup>
+	<infographic-bargroup name="LinkedIn">
+		<infographic-bar value="30">Number of posts</infographic-bar>
+	</infographic-bargroup>
+	<infographic-bargroup name="Twitter">
+		<infographic-bar value="5">Number of posts</infographic-bar>
+	</infographic-bargroup>
+	<infographic-bargroup name="Other">
+		<infographic-bar value="20">Number of posts</infographic-bar>
+	</infographic-bargroup>	
+  </infographic-data>
+</infographic-bargraph>
+        
 
         </div>
     </div>

@@ -555,4 +555,8 @@ def search_option():
     
     # return render_template('dis_doctor_noappoint.html',msg="NO APPOINTMENTS")
     # return render_template('search_option.html')
+@app.route('/view_chart')
+def view_chart():
+    
+    return render_template('view_chart.html')
 app.run()
