@@ -247,10 +247,25 @@ def update_profile():
         print(e)
         return render_template('patientdashboard.html',msg="error")
 
-@app.route('/change_pass')
+@app.route('/change_pass',methods=['GET','POST'])
 def change_pass():
-    return render_template('change_pass.html')
+    if request.method == "GET":
+        return render_template("change_pass.html")
+    else: 
+        sql='select * from patient_details where emailid=%s and pwd=%s'
+        val=[session['loggedUser'],request.form['opwd']]
+        mycursor.execute(sql,val)
+        myresult = mycursor.fetchall()
+        conn.commit()
 
+        if len(myresult)==1:
+            sql1='update patient_details set pwd=%s where emailid=%s'
+            val1=[request.form['ptxt'],session['loggedUser']]
+            mycursor.execute(sql1,val1)
+            conn.commit()
+            return render_template("patientdashboard.html",msg="Changed password successfully")
+        else:
+            return render_template("patientdashboard.html",msg="Old password is incorrect")
 
 @app.route('/redirect')
 def topatient():
