@@ -421,7 +421,6 @@
 
     <!-------------------------Contact area------------------>
     <section id="contact" class="padding">
-
         <div class="container-fluid">
 
             <div class="row">
@@ -435,25 +434,25 @@
                 <div class="col-xs-12 col-md-6 " id="contact" class="one">
 
 
-                    <form class="mb-sm-4" id="for">
+                    <form class="mb-sm-4" id="for" action="/contact_us" method="POST">
 
 
                         <div class="form-group">
                             <label for="exampleFormControlInput2">Name</label>
-                            <input type="name" class="form-control" id="exampleFormControlInput2"
+                            <input type="name" name="name" class="form-control" id="exampleFormControlInput2"
                                 placeholder="Full Name">
                         </div>
 
 
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Email address</label>
-                            <input type="email" class="form-control" id="exampleFormControlInput1"
+                            <input type="email" name="email" class="form-control" id="exampleFormControlInput1"
                                 placeholder="name@example.com">
                         </div>
 
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">Message</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            <textarea name="message" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                         </div>
 
                         <button type="submit" class="btn btn-info">Submit</button>

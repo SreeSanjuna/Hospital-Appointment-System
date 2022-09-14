@@ -505,4 +505,11 @@ def del_appoint():
     conn.commit()
     return redirect(url_for('doctor_appoint'))
 
+@app.route('/contact_us',methods=['POST'])
+def contact_us():
+    sql='insert into contactus(fullname,emailid,message) values(%s,%s,%s)'
+    val=[request.form['name'],request.form['email'],request.form['message']]
+    mycursor.execute(sql,val)
+    conn.commit()
+    return render_template('welcome.html')
 app.run()
