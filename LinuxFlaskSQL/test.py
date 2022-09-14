@@ -273,7 +273,11 @@ def topatient():
 
 @app.route('/book_1')
 def book1():
-    return render_template('book_appointment1.html')
+    sql='select sname from specialization'
+    mycursor.execute(sql)
+    spl=mycursor.fetchall()
+    print(spl)
+    return render_template('book_appointment1.html',specials=spl)
 
 @app.route('/book_2',methods=['POST'])
 def book2():
@@ -298,19 +302,38 @@ def book2():
         names.append(fetchnames[0])
     return render_template('book_1.html',spl=request.form['special'], namelist=names)
 
-@app.route('/booking',methods=['POST'])
-def book3():
+@app.route('/book_3',methods=['POST'])
+def book_3():
     sql1='select doctorID from doctor_details where fullname=%s'
     val1=[request.form['doctors']]
     mycursor.execute(sql1,val1)
-    doctorid=mycursor.fetchone()[0]
+    did=mycursor.fetchone()[0]
+    session['doctorid']=did
+    session['reason']=request.form['reason']
+    session['date']=request.form['date']
+    sql2='select a_time from appointments where doctorID=%s and a_date=%s'
+    val2=[did,request.form['date']]
+    mycursor.execute(sql2,val2)
+    times=mycursor.fetchall()
+    print(times)
+    l=['9:30','10:00','10:30','11:00','11:30','12:00','12:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00','17:30','18:00']
+    for i in times:
+        if i[0] in l:
+            l.remove(i[0])
+    print(l)
+    return render_template('book_3.html',time=l)
+@app.route('/booking',methods=['POST'])
+def book3():
+    
     sql2='select patientID from patient_details where emailid=%s'
     val2=[session['loggedUser']]
     mycursor.execute(sql2,val2)
+    print("heyyy 1")
     patientid=mycursor.fetchone()[0]
     sql3='insert into appointments(patientID,doctorID,a_date,a_time,reason) values(%s,%s,%s,%s,%s)'
-    val3=[patientid,doctorid,request.form['date'],request.form['time'],request.form['reason']]
+    val3=[patientid,session['doctorid'],session['date'],request.form['times'],session['reason']]
     mycursor.execute(sql3,val3)
+    print("heyy 2")
     conn.commit()
     return render_template('patientdashboard.html',msg="Booked successfully")
 

@@ -153,6 +153,32 @@ a.article:hover {
     color: #fff !important;
 }
 
+footer {
+    background-color: #222;
+    color: #fff;
+    font-size: 15px;
+    bottom: 0;
+    position: flex;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 999;
+}
+
+footer p {
+    margin: 9px 0;
+}
+
+footer i {
+    color: red;
+}
+
+footer a {
+    color: #3c97bf;
+    text-decoration: none;
+}
+
+
 /* ---------------------------------------------------
     CONTENT STYLE
 ----------------------------------------------------- */
@@ -213,14 +239,14 @@ a.article:hover {
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
-                            <li class="nav-item active">
+                            <!-- <li class="nav-item active">
                                 <a class="nav-link" href="#">Page</a>
+                            </li> -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="/change_pass">Change Password</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
+                                <a class="nav-link" href="/patient_profile">Update Profile</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="patient_logout">Logout</a>
@@ -231,9 +257,9 @@ a.article:hover {
             </nav>
 <p style='color:red;' text-align="center">{{msg}}</p>
             <div class="container">
-                <div>
-                    <table border="1">
-                        <tr>
+                <div class="table-responsive">
+                    <table class="table">
+                        <tr class="table-primary">
                             <td>Doctor Name</td>
                             <td>Date</td>
                             <td>Time</td>
@@ -256,6 +282,13 @@ a.article:hover {
             </div>
         </div>
     </div>
+
+
+    <footer>
+        Created by <i class="fa fa-heart"></i>
+        <a target="_blank" href="#">FD2ISV ©Copyright 2022</a>
+    </footer>
+
     <script>
         $(document).ready(function () {
             $('#sidebarCollapse').on('click', function () {
