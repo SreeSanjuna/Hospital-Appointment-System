@@ -1,7 +1,8 @@
 <!doctype html>
 <html lang="en">
   <head>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -22,6 +23,10 @@
 body {
     font-family: 'Poppins', sans-serif;
     background: #fafafa;
+    background-image: url("/static/assets/img/image-from-rawpixel-id-2292399-jpeg.jpg");
+    /* background-position: center; Center the image */
+    background-repeat: repeat; /* Do not repeat the image */
+    background-size: cover;
 }
 
 p {
@@ -75,7 +80,7 @@ a:focus {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #7386D5;
+    background: #283546;
     color: #fff;
     transition: all 0.3s;
 }
@@ -86,14 +91,13 @@ a:focus {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #6d7fcc;
+    background: #232F3E;
 }
 
 #sidebar ul.components {
     padding: 20px 0;
-    border-bottom: 1px solid #47748b;
+    border-bottom: 1px solid #2d3e52;
 }
-
 #sidebar ul p {
     color: #fff;
     padding: 10px;
@@ -160,7 +164,7 @@ a.article:hover {
 footer {
     background-color: #222;
     color: #fff;
-    font-size: 10px;
+    font-size: 15px;
     bottom: 0;
     position: fixed;
     left: 0;
@@ -260,57 +264,14 @@ footer a {
                 </div>
             </nav>
 
-            <!-- Welcome Alert -->
-            <div class="alert alert-success">
+            <div id="alert" class="alert alert-success alert-dismissible fade show" role="alert">
                 <strong>Welcome!</strong> {{name}} <!-- Dr. Name-->
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
             </div>
+<p style='color:red;' text-align="center">{{msg}}</p>
 
-
-
-            <!-- <div class="container">
-                <div class="row">
-                    <div style="text-align: center;" class="col-lg-3 col-md-4 col-sm-6">
-
-                        <div class="card">
-                            <img style="width: 150px;  display: block;
-                            margin-left: auto;
-                            margin-right: auto;
-                            width: 50%" src="./img/icons8-male-user-96.png" alt="img" class="img-fluid">
-                            <div class="card-body">
-                                <h3 class="card-title">My Profile</h3>
-                                <a href="#" class="card-link stretched-link">Update Profile</a>
-    
-                            </div>
-                        </div>
-    
-    
-                    </div> -->
-
-
-
-            <!-- Grid  -->
-            <!-- <div class="container">
-                <div class="row align-items-center ">
-                    <div class="card">
-                        <div class="col text-center">
-                            <span class="fa-stack fa-lg" style="font-size:60px;color:#C0C0C0 ;">
-                                <i class="fa fa-circle-thin fa-stack-2x" style="color:black;"></i>
-                                <i class="fas fa-user fa-stack-1x"></i>
-                            </span>
-                            <p>My Profile</p>
-                        </div>
-                    </div> 
-                    <div class="card">
-                        <div class="col col-md-offset-2 text-center">
-                            <span class="fa-stack fa-lg" style="font-size:60px;color:#C0C0C0 ;">
-                                <i class="fa fa-circle-thin fa-stack-2x" ></i>
-                                <i class="fas fa-list fa-stack-1x"></i>
-                            </span>
-                            <p>My Appointments</p>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
 
             <div class="row text-center">
                     <div class="col-xs-2 col-sm-6 col-md-3 col-lg-4 col-xl-6 card">
@@ -326,7 +287,7 @@ footer a {
                         </i>
                         <div class="card-body">
                             <h3 class="card-title">My Appointments</h3>
-                            <a href="#" class="card-link stretched-link">View Appointment History</a>
+                            <a href="/doctor_appoint" class="card-link stretched-link">View Appointment History</a>
                         </div>
                     </div>
             </div>
@@ -334,10 +295,8 @@ footer a {
         </div>
     </div>
     <footer>
-        <p>
             Created by <i class="fa fa-heart"></i>
             <a target="_blank" href="#">FD2ISV ©Copyright 2022</a>
-        </p>
     </footer>
 
     <script>
@@ -346,6 +305,12 @@ footer a {
                 $('#sidebar').toggleClass('active');
             });
         });
+
+        setTimeout(function () {
+        // Closing the alert
+        $('#alert').alert('close');
+        }, 5000);
+
     </script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

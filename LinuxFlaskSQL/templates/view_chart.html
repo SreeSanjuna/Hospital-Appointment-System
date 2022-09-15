@@ -208,6 +208,7 @@ footer a {
         display: none;
     }
 }
+
     </style>
   </head>
   <body>
@@ -314,19 +315,28 @@ footer a {
                 </div>
             </div> -->
 
-            <h3 style="text-align:center">Bar Chart HTML Example:  Using Only The HTML Charts Tag Library</h3>
+            <!-- <h3 style="text-align:center">Bar Chart HTML Example:  Using Only The HTML Charts Tag Library</h3> -->
 
             <h1>Specialization vs Number of Patients Bar Chart </h1>
 
-            <div class="chart-wrap vertical">
-              <!-- <h2 class="title">Bar Chart HTML Example:  Using Only HTML And CSS</h2> -->
-              
-              <div class="grid">
-                <!-- {% for i in %} -->
-                  <div class="bar" style="--bar-value:20%;" data-name="Other" title="Other 20%"></div>    
-              </div>
-            </div>
         
+            <infographic-bargraph style="padding:0 5%;width:100%" 
+            width="90%" height="300" type="vertical" 
+            font-size="20px" font-color="#000000" font-family="Open Sans"
+            colors="#F16335"
+            serie-spacing="35" padding="25" max-value="100"
+            grid-scale="20" grid-font-size="14px" grid-color="#aaa">
+            <infographic-data>
+                {% for i in range(0,j): %}
+              <infographic-bargroup name="{{pcount[i]}}">
+                  <infographic-bar value="{{data[i][1]}}">Number of patients</infographic-bar>
+              </infographic-bargroup>
+              	{%endfor%}
+            </infographic-data>
+          </infographic-bargraph>
+
+
+
 
         </div>
     </div>

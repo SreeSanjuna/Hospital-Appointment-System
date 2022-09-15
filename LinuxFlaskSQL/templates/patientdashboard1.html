@@ -8,11 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <!-- Icons Lib : Font Awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-
-
-    <title>Update Patient</title>
+    <title>Patient Dashboard</title>
     <style>
         /*
     DEMO STYLE
@@ -22,10 +18,6 @@
 body {
     font-family: 'Poppins', sans-serif;
     background: #fafafa;
-    background-image: url("/static/assets/img/image-from-rawpixel-id-2292399-jpeg.jpg");
-    /* background-position: center; Center the image */
-    background-repeat: repeat; /* Do not repeat the image */
-    background-size: cover;
 }
 
 p {
@@ -79,7 +71,7 @@ a:focus {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #283546;
+    background: #7386D5;
     color: #fff;
     transition: all 0.3s;
 }
@@ -90,12 +82,12 @@ a:focus {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #232F3E;
+    background: #6d7fcc;
 }
 
 #sidebar ul.components {
     padding: 20px 0;
-    border-bottom: 1px solid #2d3e52;
+    border-bottom: 1px solid #47748b;
 }
 
 #sidebar ul p {
@@ -172,36 +164,6 @@ a.article:hover {
     transition: all 0.3s;
 }
 
-
-footer {
-    background-color: #222;
-    color: #fff;
-    font-size: 15px;
-    bottom: 0;
-    position: fixed;
-    left: 0;
-    right: 0;
-    text-align: center;
-    z-index: 999;
-}
-
-footer p {
-    margin: 9px 0;
-}
-
-footer i {
-    color: red;
-}
-
-footer a {
-    color: #3c97bf;
-    text-decoration: none;
-}
-
-td {
-    color: whitesmoke;
-}
-
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
@@ -267,67 +229,59 @@ td {
                     </div>
                 </div>
             </nav>
-            <div>
-                <h1 style="text-align: center;font-family: cursive; color: #6d7fcc ; content: center; margin: auto;">My Details</h1> <br> <br>
-                <h1></h1>
-                <div class="container-sm" style="background-color:#066961; border-radius: 50px; margin-left: 125px; margin-right: 125px; padding: 35px;" >
-                    <table style="margin: auto;">
-                        <p style='color:red;'  align="center" >{{msg}}</p>
-                        <form class="form-group" action="/update_profile" method="POST"> 
-                            <tr>
-                                <td colspan="2" class="form-inline">
-                                Full Name<input type="text" name="name" class="form-control" value="{{pdata[1]}}" placeholder="Enter Full Name" size="65.5%" required>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" class="form-inline">
-                                Email ID <input type="text" name="emailid" class="form-control" value="{{pdata[2]}}" placeholder="Email" size="65.5%" style="
-                                margin-left: 17px; " required>
-                                </td>
-                            </tr>
-                            <table style="margin: auto;">
-                                <tr>
-                                    <td>Gender </td>
-                                    <td> <input type="text" name="gender" value="{{pdata[3]}}" class="form-control" required></td>
-                                    <td>DOB </td>
-                                    <td><input type="text" name="dob" value="{{pdata[4]}}" class="form-control" required></td>
-                                
-                                </tr>
-                                <tr>
-                                    <td>Contact Number :</td>
-                                    <td><input type="text" name="contactno" value="{{pdata[6]}}" class="form-control" required></td>
-                                    <td>Address </td>
-                                    <td><input type="text" name="address" value="{{pdata[7]}}" class="form-control" required></td>
-                                
-                                </tr>
-                                <tr>
-                                    <td>State </td>
-                                    <td><input type="text" name="state" value="{{pdata[8]}}" class="form-control"></td>
-                                    <td>City  </td>
-                                    <td><input type="text" name="city" value="{{pdata[9]}}" class="form-control"></td>
-                                </tr>
-
-          
-                            </table>
-                        </br>
-                            <table style="margin: auto;">
-                            <tr class="text-center">
-                                <td><input style="background-color: #7386D5; border-color: #222; color: #fff;"  type="submit" value="UPDATE" class="submitbtn"></td>
-                            </tr>
-                            </table>
-                        </form>
-                    </table>
-                </div>
+<p style='color:red;' text-align="center">{{msg}}</p>
+            <div class="container">
+                <div class="row">
+                    <div style="text-align: center;" class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="card">
+                            <img style="width: 150px;  display: block;
+                            margin-left: auto;
+                            margin-right: auto;
+                            width: 50%" src="/static/assets/img/icons8-male-user-96.png" alt="img" class="img-fluid">
+                            <div class="card-body">
+                                <h3 class="card-title">My Profile</h3>
+                                <a href="/patient_profile_view" class="card-link stretched-link">View Profile</a>
     
+                            </div>
+                        </div>
+                    </div>
+                    <div style="text-align: center;" class="col-lg-3 col-md-4 col-sm-6">
 
-                    
-        </div>
+                        <div class="card">
+                            <img style="width: 150px;  display: block;
+                            margin-left: auto;
+                            margin-right: auto;
+                            width: 50%" src="/static/assets/img/icons8-add-folder-96.png" alt="img" class="img-fluid">
+                            <div class="card-body">
+                                <h3 class="card-title">My Appointments</h3>
+                                <a href="/appointment_history" class="card-link stretched-link">View Appointment History</a>
+    
+                            </div>
+                        </div>
+    
+    
+                    </div>
+                    <div style="text-align: center;" class="col-lg-3 col-md-4 col-sm-6">
+
+                        <div class="card">
+                            <img style="width: 150px;  display: block;
+                            margin-left: auto;
+                            margin-right: auto;
+                            width: 50%" src="/static/assets/img/icons8-event-accepted-96.png" alt="img" class="img-fluid">
+                            <div class="card-body">
+                                <h3 class="card-title">Book My Appointment</h3>
+                                <a href="/book_1" class="card-link stretched-link">Book Appointment</a>
+    
+                            </div>
+                        </div>
+    
+    
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
-    <footer>
-        Created by <i class="fa fa-heart"></i>
-        <a target="_blank" href="#">FD2ISV ©Copyright 2022</a>
-    </footer>
     <script>
         $(document).ready(function () {
             $('#sidebarCollapse').on('click', function () {

@@ -1,8 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -13,8 +12,7 @@
     <!-- Icons Lib : Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <title>Admin Dashboard</title>
+    <title>Doctor Dashboard</title>
     <style>
         /*
     DEMO STYLE
@@ -24,10 +22,6 @@
 body {
     font-family: 'Poppins', sans-serif;
     background: #fafafa;
-    background-image: url("/static/assets/img/image-from-rawpixel-id-2292399-jpeg.jpg");
-    /* background-position: center; Center the image */
-    background-repeat: repeat; /* Do not repeat the image */
-    background-size: cover;
 }
 
 p {
@@ -81,7 +75,7 @@ a:focus {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #283546;
+    background: #7386D5;
     color: #fff;
     transition: all 0.3s;
 }
@@ -92,12 +86,12 @@ a:focus {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #232F3E;
+    background: #6d7fcc;
 }
 
 #sidebar ul.components {
     padding: 20px 0;
-    border-bottom: 1px solid #2d3e52;
+    border-bottom: 1px solid #47748b;
 }
 
 #sidebar ul p {
@@ -166,7 +160,7 @@ a.article:hover {
 footer {
     background-color: #222;
     color: #fff;
-    font-size: 15px;
+    font-size: 10px;
     bottom: 0;
     position: fixed;
     left: 0;
@@ -221,127 +215,75 @@ footer a {
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3 style="text-align: center;">Admin Management Portal</h3>
+                <h3>Doctor Management Portal</h3>
             </div>
 
             <ul class="list-unstyled components">
                 <li>
-                    <a href="/admin_login">Admin Dashboard</a>
+                    <a href="/doctor_login">Doctor Dashboard</a>
                 </li>
                 <li>
                     <li>
-                        <a href="/specializations">Specialization</a>
+                        <a href="/doctor_profile_view">My Profile</a>
                     </li>
                 </li>
                 <li>
-                    <a href="/doctor_details">Doctors</a>
-                </li>
-                <li>
-                    <li>
-                        <a href="/patient_display">Patients</a>
-                    </li>
-                </li>
-                <li>
-                    <a href="/appointment_disp">Appointment History</a>
-                </li>
-                <li>
-                    <li>
-                        <a href="/doc_sess_disp">Doctors Session Logs</a>
-                    </li>
-                </li>
-                <li>
-                    <li>
-                        <a href="/user_com">User comments</a>
-                    </li>
+                    <a href="/doctor_appoint">Appointments</a>
                 </li>
                 
             </ul>
         </nav>
-        
-
-        <!-- Page Content  -->
         <div id="content">
 
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
-                            
+                            <!-- <li class="nav-item">
+                                <a class="nav-link" href="#">Page</a>
+                            </li> -->
+                            <!-- <li class="nav-item">
+                                <a class="nav-link" href="/doctor_profile_view">My Profile</a>
+                            </li> -->
                             <li class="nav-item">
-                                <a class="nav-link" href="/admin_logout">Logout</a>
+                                <a class="nav-link" href="/doctor_profile">Update Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/doctor_logout">Logout</a>
                             </li>
                         </ul>
                     </div>
                     
                 </div>
             </nav>
-
-            <div id="alert" class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>Welcome!</strong> Admin 
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-
-            <table class="table table-striped">
-                <thead>
-                  <tr style="background-color: #066961; color: whitesmoke;">
-                    <th scope="col">Sl.No</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Email Id</th>
-                    <th scope="col">Message</th>
-                  </tr>
-                </thead>
-                <tbody>
-                    {% for i in dis: %} 
-                    <tr>
-                        <td>{{i[0]}}</td>
-                        <td>{{i[1]}}</td>
-                        <td>{{i[2]}}</td>
-                        <td>{{i[3]}}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-              </table>
-
-            
-
-            
-                       
-
-                   
-
-                    
-
-                    
-
-            </div>
-
-        </div>
-    </div>
-
-
-
-    <footer>
-        Created by <i class="fa fa-heart"></i>
-        <a target="_blank" href="#">FD2ISV ©Copyright 2022</a>
-    </footer>
-
-    <script>
-        $(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').toggleClass('active');
-            });
-        });
-
-        setTimeout(function () {
-        // Closing the alert
-        $('#alert').alert('close');
-        }, 5000);
-
-    </script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
-</html>
+            <form action="/search_option" method="POST">
+                <div><select name="opt" id="" required>
+                    <option disabled >--Select an option--</option>
+            <option value="pending">pending</option>
+            <option value="confirm">confirmed</option>
+            <option value="visited">visited</option>
+            <option value="disapproved">disapproved</option>
+            <option value="default">Default</option>
+            <input type="submit" value="Search" name="" id="">
+        </select></div>
+    </form>
+            <p style='color:red;' text-align="center">{{msg}}</p>
+            <footer>
+                <p>
+                    Created by <i class="fa fa-heart"></i>
+                    <a target="_blank" href="#">FD2ISV ©Copyright 2022</a>
+                </p>
+            </footer>
+        
+            <script>
+                $(document).ready(function () {
+                    $('#sidebarCollapse').on('click', function () {
+                        $('#sidebar').toggleClass('active');
+                    });
+                });
+            </script>
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+          </body>
+        </html>
