@@ -1,0 +1,23 @@
+Allergist/Immunologist
+Anesthesiologist
+Cardiologist
+Dermatologist
+Endocrinologist
+Emergency Physician
+Gastroenterologist
+Gynaecologist/Obstetrician
+General Surgeon
+Hematologist
+Nephrologist
+Neurologist
+Oncologist
+Ophthalmologist
+Orthopedist
+Otolaryngologist (ENT)
+Pediatrician
+Physiatrist
+Podiatrist
+Psychiatrist
+Pulmonologist
+Rheumatologist
+Urologist
