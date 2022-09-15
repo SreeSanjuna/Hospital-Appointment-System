@@ -51,10 +51,10 @@ a {
 
 button {
 	border-radius: 20px;
-	/* border: 1px solid #3c97bf;
-	background-color: #3c97bf; */
-	border: 1px solid #FF4B2B;
-	background-color: #FF4B2B;
+	border: 1px solid #3c97bf;
+	background-color: #3c97bf;
+	/* border: 1px solid #FF4B2B;
+	background-color: #FF4B2B; */
 	color: #FFFFFF;
 	font-size: 12px;
 	font-weight: bold;
@@ -168,12 +168,12 @@ input {
 }
 
 .overlay {
-	/* background: #1fd4cb;
+	background: #1fd4cb;
 	background: -webkit-linear-gradient(to right, #3c97bf, #1fd4cb);
-	background: linear-gradient(to right, #3c97bf, #1fd4cb); */
-	background: #FF416C;
+	background: linear-gradient(to right, #3c97bf, #1fd4cb);
+	/* background: #FF416C;
 	background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
-	background: linear-gradient(to right, #FF4B2B, #FF416C);
+	background: linear-gradient(to right, #FF4B2B, #FF416C); */
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: 0 0;
@@ -268,9 +268,8 @@ footer a {
 	<div class="form-container sign-in-container">
 		<form action="/adminlogin" method="POST" id="login-form">
 			<h1>Sign in</h1>
-            <p style="color:red;"> You have entered Wrong Email ID! </p>
-			<input type="email" name="email" placeholder="Email" />
-			<input type="password" name="pwd" placeholder="Password" />
+			<input type="email" name="email" placeholder="Email"  required />
+			<input type="password" name="pwd" placeholder="Password"  required />
 			<a href="/hi">Forgot your password?</a>
 			<button>Sign In</button>
 		</form>
@@ -293,5 +292,4 @@ footer a {
 </footer>
 </body>
 </html>
-
 
